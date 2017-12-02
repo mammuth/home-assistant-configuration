@@ -8,6 +8,7 @@ Within this repository I'm sharing my Home Assistant configuration.
 - Turn coffee machine on when alarm clock rings (using Sleep As Android and a Wifi switch)
 - Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
+- Enable shuffle mode on spotify (shell script)
 - WIP: Voice control everything via DIY Amazon Echo (using Dialogflow)
 
 ### Main Dashboard (minimalistic)
