@@ -22,14 +22,3 @@ Most of the code / configuration is English except friendly names of frontend-fa
 
 ### Raspberry PI Monitoring
 ![screenshot from 2017-12-02 22-33-03](https://user-images.githubusercontent.com/3121306/33519912-c9be9278-d7b0-11e7-8baa-3405679b56d2.png)
-
-
-### Dependencies:
-- nmap: device_tracker
-- jq: Used for json parsing used in the spotify shuffle shell command
-- python3 python3-venv python3-pip: Let's Encrypt
-- libpython-dev libffi-dev libssl-dev: HTML5 push notifications
-- libxslt-dev libxml2-dev python3-lxml: FRITZ!Box
-
-Python:
-- lxml, fritzconnection: FRITZ!Box (takes long installing)
