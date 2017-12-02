@@ -1,0 +1,7 @@
+humans:
+  name: Humans Anwesend Indikatoren
+  entities:
+    - device_tracker.max_smartphone
+    - device_tracker.theresa_smartphone
+    - device_tracker.thebeast
+    - device_tracker.tv

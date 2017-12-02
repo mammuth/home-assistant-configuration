@@ -1,0 +1,18 @@
+exclude:
+    domains:
+      - automations
+      - weblink
+      - updater
+      - group
+      - script
+    entities:
+      - sun.sun
+      - sensor.date
+      - sensor.since_last_boot
+      - sensor.u6_uni
+      - sensor.u6_stadt
+      # Pi Hole
+      - sensor.pihole_dns_queries_today
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_percentage_blocked_today
+      - sensor.pihole_dns_queries_cached

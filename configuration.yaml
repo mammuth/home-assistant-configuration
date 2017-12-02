@@ -1,0 +1,99 @@
+homeassistant:
+  name: Zuhause
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  unit_system: metric
+  time_zone: Europe/Berlin
+
+  customize: !include customize.yaml
+
+
+sun:
+frontend:
+  javascript_version: latest
+  themes: !include themes.yaml
+discovery:
+config:
+updater:
+  include_used_components: true # Allows Home Assistant developers to focus on popular components.
+
+
+weblink:
+  entities:
+    - name: Pi-Hole Dashboard
+      url: http://raspi/admin/
+      icon: mdi:chart-line
+
+
+# mqtt:
+
+
+logger:
+  default: warn
+  logs:
+    custom_components.fritzbox_guestwifi: debug
+    homeassistant.components.recorder: debug
+    homeassistant.components.device_tracker: warn
+    homeassistant.components.http: warn # fail2ban uses this log
+    homeassistant.core: warn
+
+
+http:
+  api_password: !secret api_password
+  base_url: !secret base_url
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  ip_ban_enabled: True
+  login_attempts_threshold: 2
+  trusted_networks: 
+    - !secret var_ip_thebeast
+    - !secret var_ip_max_smartphone
+    - !secret var_ip_theresa_smartphone
+
+
+tts:
+  platform: google
+  language: de
+
+
+device_tracker:
+  # - platform: owntracks
+  - platform: fritz
+    username: !secret fritzbox_username
+    password: !secret fritzbox_password
+    track_new_devices: no
+
+
+light:
+  platform: hue
+  host: !secret var_ip_hue
+
+
+media_player:
+  - platform: cast
+    host: !secret var_ip_soundbar
+
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_secret
+
+
+alexa: !include alexa.yaml
+automation: !include automations.yaml
+group: !include_dir_merge_named groups
+history: !include history.yaml
+input_boolean: !include_dir_merge_named input_boolean
+logbook: !include logbook.yaml
+notify: !include notify.yaml
+recorder: !include recorder.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
+shell_command: !include shell_commands.yaml
+switch: !include switch.yaml
+
+# Custom Components
+fritzbox_guestwifi:
+  username: !secret fritzbox_username
+  password: !secret fritzbox_password

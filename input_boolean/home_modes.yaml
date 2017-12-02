@@ -1,0 +1,9 @@
+guest_mode:
+  name: "Gäste Anwesend"
+  icon: mdi:account-alert
+  initial: off
+
+vacation_mode:
+  name: Im Urlaub
+  icon: mdi:sunglasses
+  initial: off

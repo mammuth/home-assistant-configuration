@@ -1,0 +1,97 @@
+romantic_bedroom:
+  alias: "Romantisches Schlafzimmer (Licht & Musik)"
+  sequence:
+
+    - service: scene.turn_on
+      entity_id: scene.nachtlicht_scene
+    
+    - alias: Select the Echo Schlafzimmer as Source for Spotify
+      service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Echo Schlafzimmer
+    
+    - alias: Spotify Select Romantic Playlist
+      service: media_player.play_media
+      data:
+        entity_id: media_player.spotify
+        media_content_type: 'playlist'
+      data_template:
+        # Select one of multiple playlists
+        media_content_id: >
+          {%- set playlists = [
+              "spotify:user:millicha:playlist:2QUuRivfo37ZY52jormsH9", 
+              "spotify:user:francescodigilio:playlist:1LCcGqHXN1G7jp4cLHagSb",
+              "spotify:user:spotify:playlist:37i9dQZF1DX4s3V2rTswzO",
+             ] -%}
+            {% set index =  (range(0, (playlists | length - 1 ) )|random) -%}
+            {{ playlists[index] }}
+
+    - service: shell_command.shuffle_spotify
+
+    - alias: Next track (so we don't always hear the same song at the beginning)
+      service: media_player.media_next_track
+
+    - alias: Set Spotify Volume
+      service: media_player.volume_set
+      data:
+        entitiy_id: media_player.spotify  # Doesn't work when applying it directly to spotify?
+        volume_level: 0.5
+
+
+# Generic script for TTS via the soundbar. Doesn't say anything when TV is on. Provide volume and message
+soundbar_say:
+  alias: "Soundbar TTS script"
+  sequence:
+    # Check whether TV is off, otherwise it's a mess
+    - condition: state
+      entity_id: device_tracker.tv
+      state: 'not_home'
+   # Buggy, volume doesn't get set to x%, but it behaves strangly, sometimes adding x on top of the current volume
+   # - service: media_player.volume_set
+   #   data_template:
+   #     entity_id: media_player.soundbar
+   #     volume_level: "{{ volume|default(0.5, true) }}"
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.soundbar
+        message: "{{ message }}"
+        language: 'de'
+
+
+# Coffee Machine Script
+start_coffee_machine:
+  alias: "Coffee machine on, off after 15m"
+  sequence:
+    # Turn the switch on
+    - service: switch.turn_on
+      data:
+        entity_id: switch.plug_kitchen
+    - delay: 00:15:00
+    - service: switch.turn_off
+      data:
+        entity_id: switch.plug_kitchen
+    # Some TTS:
+    # - service: script.soundbar_say
+    #   data:
+    #     volume: 1
+    #     message: "Los aufstehen! Kaffee ist gleich fertig!"
+    # - delay: 00:01:00
+    # - service: script.soundbar_say
+    #   data:
+    #     volume: 1
+    #     message: "Wetten der Kaffee ist schon fertig? Glaubst du mir etwa nicht?"
+    # - condition: state
+    #   entity_id: input_boolean.guest_mode
+    #   state: 'off'
+    # - delay: 00:01:00
+    # - service: script.soundbar_say
+    #   data:
+    #     volume: 1
+    #     message: "Guten Morgen, Schlafmütze!"
+
+
+run_speedtest:
+  alias: "Run Speedtest"
+  sequence:
+    - service: sensor.update_speedtest

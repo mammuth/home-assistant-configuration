@@ -1,0 +1,9 @@
+exclude:
+  entities:
+    - sensor.since_last_boot
+    - group.beleuchtung
+    - group.people
+    - light.wohnzimmer
+    - light.schlafzimmer
+  domains:
+    - persistent_notification

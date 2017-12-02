@@ -1,0 +1,60 @@
+- name: nachtlicht_scene
+  entities:
+    light.couchlampe:
+      state: off
+      transition: 60
+    light.nachtlicht: 
+      state: on
+      brightness: 255
+      color_name: red
+
+
+- name: nachtlicht_10m
+  entities:
+    light.wohnzimmer:
+      state: off
+      transition: 10
+    light.nachtlicht: 
+      state: off
+      transition: 600
+
+
+- name: tv_scene
+  entities:
+    light.couchlampe:
+      state: on
+      brightness: 130
+      color_name: orange
+      transition: 5
+    light.stehlampe:
+      state: on
+      brightness: 100
+      color_name: orange
+      transition: 3
+
+
+- name: living_room_warm_scene
+  entities:
+    light.wohnzimmer:
+      state: on
+      brightness: 255
+      kelvin: 2500
+      transition: 3
+
+
+- name: living_room_cold_scene
+  entities:
+    light.wohnzimmer:
+      state: on
+      brightness: 255
+      kelvin: 3500
+      transition: 3
+
+
+- name: living_room_romantic_scene
+  entities:
+    light.wohnzimmer:
+      state: on
+      brightness: 255
+      color_name: red
+      transition: 3

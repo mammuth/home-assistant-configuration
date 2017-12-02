@@ -1,0 +1,8 @@
+alarm_clock_ringing:
+  name: Alarm Clock currently ringing
+  initial: off
+
+alarm_clock_in_50m:
+  name: Alarm clock rings in 50m
+  initial: off
+  # 5 min Smart WakeUp in Sleep As Android. Event gets fired 45m before that --> 50m Before wakeup

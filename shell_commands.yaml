@@ -1,0 +1,1 @@
+shuffle_spotify: bash ~/.homeassistant/shell_commands/shuffle_spotify.sh

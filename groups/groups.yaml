@@ -1,0 +1,79 @@
+# departures:
+#   name: Abfahrten
+#   entities:
+#     - sensor.u6_stadt
+#     - sensor.u6_uni
+
+
+schlafzimmer:
+  name: Schlafzimmer
+  entities:
+    - light.schlafzimmer
+    - scene.nachtlicht_scene
+    - scene.nachtlicht_10m
+
+
+wohnzimmer:
+  name: Wohnzimmer
+  entities:
+    - light.wohnzimmer
+    - scene.tv_scene
+    - scene.living_room_warm_scene
+    - scene.living_room_cold_scene
+    - scene.living_room_romantic_scene
+
+
+people:
+  name: Personen
+  control: hidden
+  entities:
+    - device_tracker.max_smartphone
+    - device_tracker.theresa_smartphone
+    - input_boolean.guest_mode
+    - input_boolean.vacation_mode
+
+
+pi_sensors:
+  name: Raspberry Pi
+  entities:
+    - sensor.cpu_use
+    - sensor.cpu_temperature
+    - sensor.disk_use_
+    - sensor.ram_use_percent
+    - sensor.since_last_boot
+
+
+pi_hole:
+  name: DNS AdBlock
+  entities:
+    - sensor.pihole_dns_queries_today
+    - sensor.pihole_ads_blocked_today
+    - sensor.pihole_ads_percentage_blocked_today
+    - sensor.pihole_dns_queries_cached
+    - weblink.pihole_dashboard
+
+
+# pi_speedtest:
+#   name: Speedtest
+#   entities:
+#     - sensor.speedtest_ping
+#     - sensor.speedtest_download
+#     - sensor.speedtest_upload
+#     - script.run_speedtest
+
+
+admin_misc:
+  name: Anderes
+  entities:
+    - sun.sun
+
+
+admin_scenes:
+  name: Lichtszenen
+  entities:
+    - scene.nachtlicht_scene
+    - scene.nachtlicht_10m
+    - scene.tv_scene
+    - scene.living_room_warm_scene
+    - scene.living_room_cold_scene
+    - scene.living_room_romantic_scene

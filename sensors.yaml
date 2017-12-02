@@ -1,0 +1,59 @@
+# - platform: mvglive
+#   nextdeparture:
+#     - name: 'U6 Uni'
+#       station: Garching
+#       products: ['U-Bahn']
+#       destinations: ['Garching-Forschungszentrum']
+#       timeoffset: 12
+#     - name: 'U6 Stadt'
+#       station: Garching
+#       products: ['U-Bahn']
+#       destinations: ['Klinikum Großhadern', 'Harras', 'Fröttmaning', 'Kieferngarten', 'Freimann', 'Münchner Freiheit']
+#       timeoffset: 12
+
+
+# - platform: openweathermap
+#   api_key: !secret openweathermap_api_key
+#   forecast: 2
+#   monitored_conditions:
+#     - weather
+
+
+- platform: dnsip
+  hostname: !secret base_url
+  scan_interval: 3600  # 1h. The sensor is just for passive monitoring.
+
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use
+    - type: processor_use
+    - type: since_last_boot
+
+
+# Raspberry CPU Temperature
+- platform: command_line
+  name: CPU Temperature
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) }}'
+
+
+- platform: pi_hole
+  name: Pi-hole
+  unit_of_measurement: "%"
+
+
+# Perform speedtest every 30m
+# - platform: speedtest
+#   server_id: 11540  # Rosenheim, Komro GmbH
+#   # server_id: 8908  # Garching, Net-D-Sign GmbH
+#   minute:
+#     - 0
+#     - 30
+#   monitored_conditions:
+#     - ping
+#     - download
+#     - upload

@@ -1,0 +1,34 @@
+default_view:
+  name: Dashboard
+  view: true
+  entities:
+    - group.people
+    # - group.departures
+    - group.wohnzimmer
+    - group.schlafzimmer
+    - script.romantic_bedroom
+    - media_player.spotify
+
+
+admin_view:
+  name: Admin
+  view: yes
+  entities:
+    - group.all_devices
+    - group.all_lights
+    - group.all_automations
+    - group.all_scripts
+    - group.all_switches
+    - group.humans
+    - group.people
+    - ǵroup.pi_hole
+    - group.admin_misc
+    - group.admin_scenes
+
+
+pi_view:
+  name: Pi
+  view: yes
+  entities:
+    - group.pi_sensors
+    - group.pi_hole

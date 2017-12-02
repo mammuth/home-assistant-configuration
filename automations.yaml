@@ -1,0 +1,440 @@
+- alias: "Falling asleep -> Nightlight off"
+  id: 'automatic_nightlight'
+  trigger:
+    - platform: state
+      entity_id: group.humans
+      from: 'home'
+      to: 'not_home'
+      
+  action:
+    - condition: state
+      entity_id: light.nachtlicht
+      state: 'on'
+
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+
+    - condition: time
+      after: '21:00:00'
+      before: '06:00:00'
+
+    - service: scene.turn_on
+      entity_id: scene.nachtlicht_10m
+
+
+- alias: "Falling asleep -> Nightlight off (after turning on again)"
+  id: 'automatic_nightlight_after_manual_turn_on'
+  trigger:
+    - platform: state
+      entity_id: light.nachtlicht
+      from: 'not_home'
+      to: 'home'
+      
+  action:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+
+    - condition: time
+      after: '22:00:00'
+      before: '06:00:00'
+
+    - service: scene.turn_on
+      entity_id: scene.nachtlicht_10m
+
+    - service: notify.html5
+      data:
+        title: "Noch 10 Minuten!"
+        message: "Das Nachtlicht geht in 10 Minuten aus. (Zweites Nachtlicht Timer)"
+
+
+- alias: "Sleeping Room light on at evening -> nightlight scene"
+  id: 'sleeping_room_light_on__nightlight_scene_when_evening'
+  trigger:
+    - platform: state
+      entity_id: light.nachtlicht
+      from: 'not_home'
+      to: 'home'
+      
+  action:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+
+    - condition: time
+      after: '22:00:00'
+      before: '06:00:00'
+
+    - service: scene.turn_on
+      entity_id: scene.nachtlicht_scene
+
+
+- alias: 'Away for 15m -> Lights off'
+  id: 'humans_away__lights_off'
+  trigger:
+    platform: state
+    entity_id: groups.humans
+    from: 'home'
+    to: 'not_home'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  condition:
+    condition: and
+    conditions:
+        # It's day (so we don't clash with the nightlight)
+      - condition: time
+        after: '07:00:00'
+        before: '21:00:00'
+        # No holiday schedule is on
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+  action:
+    service: light.turn_off
+    entity_id: group.all_lights
+
+
+- alias: 'TV on -> Soundbar on'
+  id: 'tv_on__soundbar_on'
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: 'not_home'
+    to: 'home'
+  condition:
+    # Soundbar ist durch den Cast-Standby wohl immer Home?
+    # - condition: state
+    #   entity_id: device_tracker.soundbar
+    #   state: 'not_home'
+  action:
+    # Wait 10s in order to give room to stop Spotify. 
+    # In case the Echo is connected to the Soundbar, this should change to the Google Cast Input and to the TV input afterwards.
+    # Hopefully.
+    - delay: 00:00:10
+    # ToDo: Use wait instead of delay? https://home-assistant.io/docs/scripts/#wait
+    # - wait_template: '{{ states.climate.kitchen.attributes.valve < 10 }}'
+    #   timeout: 00:00:30
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.soundbar
+
+
+- alias: 'TV on -> Spotify off'
+  id: 'tv_on__spotify_off'
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: 'not_home'
+    to: 'home'
+  action:
+    service: media_player.media_pause
+    data:
+      entity_id: media_player.spotify
+
+
+- alias: 'TV on -> Dim lights'
+  id: 'tv_on__lights_dimmed'
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: 'not_home'
+    to: 'home'
+  # ToDo: Vielleicht noch sun irgendwie einbauen? Oder Dawn etc.
+  # Mal ansehen, zu welchen Zeiten das zutrifft https://home-assistant.io/components/sun/
+  # condition:
+  #   condition: and
+  #   conditions:
+  #     - condition: time
+  #       after: '19:00:00'
+  #       before: '06:00:00'
+  #     - condition: state
+  #       entity_id: light.wohnzimmer
+  #       state: 'on'
+  action:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+    # ToDo: Make ”scene' for this?
+    - service: scene.turn_on
+      entity_id: scene.tv_scene
+
+
+- alias: 'Living Room Lights on -> TV scene (if TV on)'
+  id: 'living_room_lights_on__tv_scene'
+  trigger:
+    platform: state
+    entity_id: light.wohnzimmer
+    from: 'off'
+    to: 'on'
+  condition:
+      - condition: state
+        entity_id: device_tracker.tv
+        state: 'home'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.tv_scene
+
+- alias: 'TV off -> Bright lights'
+  id: 'tv_off__lights_bright'
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '21:30:00'
+        before: '02:00:00'
+      - condition: state
+        entity_id: light.wohnzimmer
+        state: 'on'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_cold_scene
+
+
+- alias: "Device (MacBook) turned on, while Max was away"
+  id: 'laptop_on__while_max_away'
+  trigger:
+    platform: state
+    entity_id: device_tracker.max_laptop
+    from: 'not_home'
+    to: 'home'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+    - condition: state
+      entity_id: 'device_tracker.max_smartphone'
+      state: 'not_home'
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: 'Laptop turned on'
+      message: 'MacBook was turned on and Max is not home'
+
+
+- alias: "Device (TheBeast) turned on, while Max was away"
+  id: 'thebeast_on__while_max_away'
+  trigger:
+    platform: state
+    entity_id: device_tracker.thebeast
+    from: 'not_home'
+    to: 'home'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+    - condition: state
+      entity_id: 'device_tracker.max_smartphone'
+      state: 'not_home'
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: 'TheBeast turned on'
+      message: 'TheBeast was turned on and Max is not home'
+
+
+- alias: Update Available Notification
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: persistent_notification.create
+    data:
+      title: Update verfügbar
+      message: "Take a look at the <a href='https://github.com/home-assistant/home-assistant/releases' target='_blank' rel='noopener'>Release Notes</a><br>Update via <em>pip3 install --upgrade homeassistant</em>"
+
+
+- alias: Turn on lights occasionally when on vacation
+  trigger:
+    platform: time
+    at: '21:32:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.stehlampe
+        brightness: 255
+        color: white
+    - service: notify.pushbullet_max
+      data:
+        title: "Holiday Trap"
+        message: "Wohnzimmerlampe ist an für 2h"
+    - delay: 02:00:00
+    - service: light.turn_off
+      entity_id: group.all_lights
+    - service: notify.pushbullet_max
+      data:
+        title: "Holiday Trap"
+        message: "Turned off all lights again"
+
+
+- alias: "Alarm clock ringing -> Living Room Lights on"
+  id: 'alarm_ringing__lights_on'
+  trigger: 
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: and 
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+      - condition: sun
+        before: sunrise
+        before_offset: "1:30:00"  # ToDo: Verify that this offset is working
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_cold_scene
+
+
+- alias: "Alarm clock ringing -> Coffee machine on"
+  id: 'alarm_ringing__coffee_machine_on'
+  trigger: 
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'on'
+    to: 'off'
+  condition:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+  action:
+    service: script.start_coffee_machine
+
+
+- alias: "Theresa Arrives -> Notify Max"
+  id: 'theresa_arrives__notify_max'
+  trigger:
+    platform: state
+    entity_id: device_tracker.theresa_smartphone
+    from: 'not_home'
+    to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '12:00:00'
+        before: '05:00:00'
+      - condition: state
+        entity_id: device_tracker.max_smartphone
+        state: 'not_home'
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Theresa ist jetzt Zuhause
+      message: Theresa ist gleich Zuhause
+
+
+
+- alias: "Alarm in 50m -> Wake Up Light"
+  id: 'alarm_in_50m__wakeup_light'
+  trigger: 
+    platform: state
+    entity_id: input_boolean.alarm_clock_in_50m
+    from: 'off'
+    to: 'on'
+  action:
+    # Reset input_boolean
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.alarm_clock_in_50m
+    # Wait 30 minute, so we have a 15m light transition
+    - delay: 00:30:00
+    # Turn it one with red as color and brightness 1
+    - service: light.turn_on
+      data:
+        entity_id: light.nachtlicht
+        brightness: 1
+        color_name: red
+    # Transition from low red to full brightness and white in 15m
+    - service: light.turn_on
+      data:
+        entity_id: light.nachtlicht
+        brightness: 255
+        color_name: white
+        transition: 900 # 15m
+
+
+
+- alias: "Coming home -> Lights On"
+  id: 'coming_home__lights_on'
+  trigger: 
+    platform: state
+    entity_id: group.humans
+    from: 'not_home'
+    to: 'home'
+  action:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+    - condition: time
+      after: '17:00:00'
+      before: '06:00:00'
+    - service: scene.turn_on
+      entity_id: scene.living_room_cold_scene
+
+
+
+- alias: "Night -> Dark Theme"
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '22:00'
+  action:
+    - service: frontend.set_theme
+      data:
+          name: midnight
+
+
+
+- alias: "Morning -> Main Theme"
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '07:00'
+  action:
+    - service: frontend.set_theme
+      data:
+          name: default
+
+
+
+- alias: "Guests -> Turn on guest wifi"
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'on'
+  action:
+    - service: fritzbox_guestwifi.turn_on
+    - service: notify.pushbullet_max
+      data:
+        title: Gäste-Wlan ist jetzt an
+        message: "Passwort: 01189998819991197253 as in https://www.youtube.com/watch?v=HWc3WY3fuZU"
+    - service: notify.pushbullet_theresa
+      data:
+        title: Gäste-Wlan ist jetzt an
+        message: "Passwort: 01189998819991197253 as in https://www.youtube.com/watch?v=HWc3WY3fuZU"
+
+
+
+- alias: "Guests Away -> Turn off guest wifi"
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'off'
+  action:
+    - service: fritzbox_guestwifi.turn_off
