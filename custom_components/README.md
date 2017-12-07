@@ -2,6 +2,8 @@
 configuration.yml:
 ```yaml
 fritzbox_guestwifi:
+  host: "192.168.178.1"
+  username: "home-assistant"
   password: "yourfritzboxpassword"
 ```
 
