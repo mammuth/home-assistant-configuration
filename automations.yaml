@@ -250,7 +250,7 @@
     service: persistent_notification.create
     data:
       title: Update verfügbar
-      message: "Take a look at the <a href='https://github.com/home-assistant/home-assistant/releases' target='_blank' rel='noopener'>Release Notes</a><br>Update via <em>pip3 install --upgrade homeassistant</em>"
+      message: "Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases). Update via `pip3 install --upgrade homeassistant`"
 
 
 - alias: Turn on lights occasionally when on vacation
@@ -385,7 +385,7 @@
       after: '17:00:00'
       before: '06:00:00'
     - service: scene.turn_on
-      entity_id: scene.living_room_cold_scene
+      entity_id: scene.living_room_warm_scene
 
 
 

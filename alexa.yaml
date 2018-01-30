@@ -1,0 +1,21 @@
+# Expose API so we can use Alexa by proxying requests via Haaska (this only applies if we use the ersion of Haaska that supports Amazon Smart Home v3)
+# smart_home:
+#     filter:
+#       include_domains:
+#         - light
+#         - group
+#         - scene
+#         - input_boolean
+#         - switch
+#         - script
+#       exclude_entities:
+#         - input_boolean.alarm_clock_ringing
+#         - input_boolean.alarm_clock_in_50m
+#         - group.schlafzimmer
+#         - group.wohnraum
+#     entity_config:
+#       # light.kitchen:
+#       #   name: Custom Name for Alexa
+#       #   description: The light in the kitchen
+#       group.wohnraum:
+#         display_categories: LIGHT

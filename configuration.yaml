@@ -33,7 +33,7 @@ logger:
   default: warn
   logs:
     custom_components.fritzbox_guestwifi: debug
-    homeassistant.components.recorder: debug
+    # homeassistant.components.recorder: debug  # Useful for heavy updates
     homeassistant.components.device_tracker: warn
     homeassistant.components.http: warn # fail2ban uses this log
     homeassistant.core: warn
@@ -65,9 +65,9 @@ device_tracker:
     track_new_devices: no
 
 
-light:
-  platform: hue
-  host: !secret var_ip_hue
+hue:
+  bridges:
+    - host: !secret var_ip_hue
 
 
 media_player:

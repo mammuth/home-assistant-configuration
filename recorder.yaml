@@ -1,9 +1,9 @@
 exclude:
     domains:
-      - automations
+      # - automation
       - weblink
       - updater
-      - group
+      #- group
       - script
     entities:
       - sun.sun
@@ -16,3 +16,5 @@ exclude:
       - sensor.pihole_ads_blocked_today
       - sensor.pihole_ads_percentage_blocked_today
       - sensor.pihole_dns_queries_cached
+#purge_interval: 2
+#purge_keep_days: 7

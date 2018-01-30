@@ -21,6 +21,8 @@
 
 - name: tv_scene
   entities:
+    light.kuche: off
+    light.esstisch: off
     light.couchlampe:
       state: on
       brightness: 130
@@ -35,11 +37,17 @@
 
 - name: living_room_warm_scene
   entities:
+    light.kuche: off
     light.wohnzimmer:
       state: on
       brightness: 255
       kelvin: 2500
       transition: 3
+    light.esstisch:
+      state: on
+      brightness: 150
+      transition: 3
+
 
 
 - name: living_room_cold_scene
@@ -47,7 +55,15 @@
     light.wohnzimmer:
       state: on
       brightness: 255
-      kelvin: 3500
+      kelvin: 2500
+      transition: 3
+    light.esstisch:
+      state: on
+      brightness: 255
+      transition: 3
+    light.kuche:
+      state: on
+      brightness: 255
       transition: 3
 
 
@@ -57,4 +73,8 @@
       state: on
       brightness: 255
       color_name: red
+      transition: 3
+    light.esstisch:
+      state: on
+      brightness: 100
       transition: 3

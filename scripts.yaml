@@ -1,5 +1,5 @@
 romantic_bedroom:
-  alias: "Romantisches Schlafzimmer (Licht & Musik)"
+  alias: "Sexy Times"
   sequence:
 
     - service: scene.turn_on

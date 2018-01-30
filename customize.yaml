@@ -1,6 +1,6 @@
 # Switches
 switch.plug_kitchen:
-  friendly_name: Funksteckdose Küche
+  friendly_name: Küchensteckdose
 
 # Sensors
 sensor.pihole_dns_queries_today:
@@ -53,11 +53,11 @@ scene.tv_scene:
   icon: mdi:television
 
 scene.living_room_warm_scene:
-  friendly_name: Wohnzimmer Warm
+  friendly_name: Wohnraum Warm
   icon: mdi:sofa
 
 scene.living_room_cold_scene:
-  friendly_name: Wohnzimmer Kalt
+  friendly_name: Wohnraum Hell
   icon: mdi:sofa
 
 scene.living_room_romantic_scene:

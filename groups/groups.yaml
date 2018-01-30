@@ -14,9 +14,11 @@ schlafzimmer:
 
 
 wohnzimmer:
-  name: Wohnzimmer
+  name: Wohnraum
   entities:
     - light.wohnzimmer
+    - light.esstisch
+    - light.kuche
     - scene.tv_scene
     - scene.living_room_warm_scene
     - scene.living_room_cold_scene
