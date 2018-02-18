@@ -1,9 +1,19 @@
 exclude:
   entities:
+    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.load_15m
     - sensor.since_last_boot
+
     - group.beleuchtung
     - group.people
+    
     - light.wohnzimmer
     - light.schlafzimmer
+    - light.kueche1
+    - light.kueche2
+    - light.essen1
+    - light.essen2
+    - light.essen3
   domains:
     - persistent_notification

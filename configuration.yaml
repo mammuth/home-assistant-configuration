@@ -30,6 +30,7 @@ weblink:
 
 
 logger:
+  # default: info
   default: warn
   logs:
     custom_components.fritzbox_guestwifi: debug
@@ -37,6 +38,7 @@ logger:
     homeassistant.components.device_tracker: warn
     homeassistant.components.http: warn # fail2ban uses this log
     homeassistant.core: warn
+    homeassistant.components.scene: info
 
 
 http:

@@ -1,20 +1,23 @@
-exclude:
-    domains:
-      # - automation
-      - weblink
-      - updater
-      #- group
-      - script
-    entities:
-      - sun.sun
-      - sensor.date
-      - sensor.since_last_boot
-      - sensor.u6_uni
-      - sensor.u6_stadt
-      # Pi Hole
-      - sensor.pihole_dns_queries_today
-      - sensor.pihole_ads_blocked_today
-      - sensor.pihole_ads_percentage_blocked_today
-      - sensor.pihole_dns_queries_cached
-#purge_interval: 2
-#purge_keep_days: 7
+# exclude:
+#     domains:
+#       # - automation
+#       - weblink
+#       - updater
+#       #- group
+#       - script
+#     entities:
+#       - sun.sun
+#       - sensor.date
+#       - sensor.since_last_boot
+      # - sensor.load_1m
+      # - sensor.load_5m
+      # - sensor.load_15m
+#       # - sensor.u6_uni
+#       # - sensor.u6_stadt
+#       # Pi Hole
+#       - sensor.pihole_dns_queries_today
+#       - sensor.pihole_ads_blocked_today
+#       - sensor.pihole_ads_percentage_blocked_today
+#       - sensor.pihole_dns_queries_cached
+purge_interval: 1
+purge_keep_days: 7

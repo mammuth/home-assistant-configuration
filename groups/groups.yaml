@@ -13,7 +13,7 @@ schlafzimmer:
     - scene.nachtlicht_10m
 
 
-wohnzimmer:
+wohnraum_card:
   name: Wohnraum
   entities:
     - light.wohnzimmer
@@ -38,10 +38,13 @@ people:
 pi_sensors:
   name: Raspberry Pi
   entities:
-    - sensor.cpu_use
+    - sensor.processor_use
     - sensor.cpu_temperature
-    - sensor.disk_use_
-    - sensor.ram_use_percent
+    - sensor.disk_use_percent_
+    - sensor.memory_use_percent
+    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.load_15m
     - sensor.since_last_boot
 
 

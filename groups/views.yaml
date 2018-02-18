@@ -4,7 +4,7 @@ default_view:
   entities:
     - group.people
     # - group.departures
-    - group.wohnzimmer
+    - group.wohnraum_card
     - group.schlafzimmer
     - script.romantic_bedroom
     - media_player.spotify

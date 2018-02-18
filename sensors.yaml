@@ -28,9 +28,12 @@
   resources:
     - type: disk_use_percent
       arg: /
-    - type: memory_use
+    - type: memory_use_percent
     - type: processor_use
     - type: since_last_boot
+    - type: load_1m
+    - type: load_5m
+    - type: load_15m
 
 
 # Raspberry CPU Temperature

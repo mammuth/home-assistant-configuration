@@ -15,6 +15,7 @@ secrets.yaml
 ip_bans.yaml
 known_devices.yaml
 haaska-config.json
+entity_registry.yaml
 
 html5_push_registrations.conf
 phue.conf

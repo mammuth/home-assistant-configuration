@@ -1,19 +1,16 @@
 - name: nachtlicht_scene
   entities:
-    light.couchlampe:
+    group.wohnraum:
       state: off
       transition: 60
     light.nachtlicht: 
       state: on
-      brightness: 255
+      brightness: 10
       color_name: red
 
 
 - name: nachtlicht_10m
   entities:
-    light.wohnzimmer:
-      state: off
-      transition: 10
     light.nachtlicht: 
       state: off
       transition: 600

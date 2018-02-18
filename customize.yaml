@@ -41,7 +41,7 @@ script.run_speedtest:
 
 # Scenes
 scene.nachtlicht_scene:
-  friendly_name: Nachtlicht An
+  friendly_name: Nachtlicht Szene
   icon: mdi:hotel
 
 scene.nachtlicht_10m:
