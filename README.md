@@ -17,7 +17,7 @@ Within this repository I'm sharing my Home Assistant configuration.
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
 
 ### Main Dashboard (minimalistic)
-![screenshot from 2017-12-02 22-29-33](https://user-images.githubusercontent.com/3121306/33519875-58172fa4-d7b0-11e7-91f8-77d4c4defc92.png)
+![image](https://user-images.githubusercontent.com/3121306/36357333-c67e64a6-14fc-11e8-91fc-faf7d6ee2748.png)
 
 ### Admin Dashboard
 ![image](https://user-images.githubusercontent.com/3121306/36357326-a3d87126-14fc-11e8-8270-600feca50ac0.png)
