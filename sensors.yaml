@@ -48,6 +48,9 @@
   name: Pi-hole
   unit_of_measurement: "%"
 
+- platform: time_date
+  display_options:
+    - 'time'
 
 # Perform speedtest every 30m
 # - platform: speedtest

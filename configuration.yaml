@@ -26,7 +26,9 @@ weblink:
       icon: mdi:chart-line
 
 
-# mqtt:
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
 
 
 logger:
@@ -39,7 +41,7 @@ logger:
     homeassistant.components.http: warn # fail2ban uses this log
     homeassistant.core: warn
     homeassistant.components.scene: info
-
+    homeassistant.components.intent_script: debug
 
 http:
   api_password: !secret api_password
@@ -72,6 +74,12 @@ hue:
     - host: !secret var_ip_hue
 
 
+# remote:
+#   - platform: xiaomi_miio
+#     host: !secret var_ip_ir_remote
+#     token: YOUR_TOKEN
+
+
 media_player:
   - platform: cast
     host: !secret var_ip_soundbar
@@ -80,8 +88,12 @@ media_player:
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_secret
 
+snips:
+
+python_script:
 
 alexa: !include alexa.yaml
+intent_script: !include intent_script.yaml
 automation: !include automations.yaml
 group: !include_dir_merge_named groups
 history: !include history.yaml

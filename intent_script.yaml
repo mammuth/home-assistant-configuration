@@ -1,0 +1,117 @@
+# Lights
+TurnOnLights:
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: "light.{{ entity_name }}"
+  speech:
+      text: OK
+
+TurnOffLights:
+  action:
+    - service: light.turn_off
+      data_template:
+        entity_id: "light.{{ entity_name }}"
+  speech:
+      text: OK
+
+# Groups (used for group.wohnraum, group.all_lights)
+TurnOnGroup:
+  action:
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: "group.{{ entity_name }}"
+  speech:
+      text: OK
+
+TurnOffGroup:
+  action:
+    - service: homeassistant.turn_off
+      data_template:
+        entity_id: "group.{{ entity_name }}"
+  speech:
+      text: OK
+
+# Scenes
+TurnOnScene:
+  action:
+    - service: scene.turn_on
+      data_template:
+        entity_id: "scene.{{ entity_name }}"
+  speech:
+      text: OK
+
+# Media control
+PlayMusic:
+  action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Soundbar
+    - service: media_player.media_play
+      data:
+        entity_id: media_player.spotify
+  speech:
+      text: OK
+
+PauseMusic:
+  action:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.spotify
+  speech:
+      text: OK
+
+MusicVolumeDown:
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.spotify
+        volume_level: '{{ states.media_player.spotify.attributes.volume_level -0.05 }}'
+  speech:
+      text: OK
+
+MusicVolumeUp:
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.spotify
+        volume_level: '{{ states.media_player.spotify.attributes.volume_level +0.05 }}'
+  speech:
+      text: OK
+
+PlayPlaylist:
+  action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Soundbar
+
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify
+        shuffle: true
+        
+    - service: media_player.play_media
+      data_template:
+        entity_id: media_player.spotify
+        media_content_type: playlist
+        media_content_id: >
+          {% if playlist == 'smooth_jazz' %}    {{ "spotify:user:millicha:playlist:2QUuRivfo37ZY52jormsH9" }}
+          {% elif playlist == 'good_mood' %}    {{ "spotify:user:digster.fr:playlist:1QxdL1fPW4X4eex4CrFryW" }}
+          {% elif playlist == 'favoriten' %}    {{ "spotify:user:mammuthroid:playlist:2WqoSL3QDTPmuDAAkW5KoD" }}
+          {% elif playlist == 'putzplaylist' %} {{ "spotify:user:leoniie1707:playlist:6slFv8dfCfxnurMKKvWiRy" }}
+          {% endif %}
+
+NextSong:
+  action:
+    - service: media_player.media_next_track
+      data:
+        entity_id: media_player.spotify
+  speech:
+    text: OK
+
+
+currentTime:
+  speech:
+    text: Es ist {{ states.sensor.time.state }}
