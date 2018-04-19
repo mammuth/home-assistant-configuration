@@ -10,7 +10,6 @@ Within this repository I'm sharing my Home Assistant configuration.
 - Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
 - Enable shuffle mode on spotify ([shell script](https://github.com/mammuth/home-assistant-configuration/blob/master/shell_commands/shuffle_spotify.sh))
-- Voice control with amazon echo and HA via [Haaska](https://github.com/mike-grant/haaska)
 
 
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
