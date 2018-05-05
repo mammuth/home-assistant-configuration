@@ -67,6 +67,8 @@ device_tracker:
     username: !secret fritzbox_username
     password: !secret fritzbox_password
     track_new_devices: no
+    interval_seconds: 10
+    consider_home: 15  # Needs to be at least `interval_seconds`
 
 
 hue:
@@ -90,7 +92,7 @@ media_player:
 
 snips:
 
-python_script:
+# python_script:
 
 alexa: !include alexa.yaml
 intent_script: !include intent_script.yaml

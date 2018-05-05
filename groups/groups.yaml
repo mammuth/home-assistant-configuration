@@ -19,6 +19,7 @@ wohnraum_card:
     - light.wohnzimmer
     - light.esstisch
     - light.kuche
+    - light.leselampe
     - scene.tv_scene
     - scene.living_room_warm_scene
     - scene.living_room_cold_scene

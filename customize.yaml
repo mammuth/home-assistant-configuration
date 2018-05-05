@@ -64,7 +64,9 @@ scene.living_room_romantic_scene:
   friendly_name: Dinner
   icon: mdi:glass-tulip
 
-
+# Lights
+light.leselampe:
+  icon: mdi:ceiling-light
 
 
 # Admin View
