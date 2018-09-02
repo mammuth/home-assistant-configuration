@@ -20,6 +20,8 @@ entity_registry.yaml
 html5_push_registrations.conf
 phue.conf
 
+.storage/
 .uuid
 .HA_VERSION
 .spotify-token-cache
+.shopping_list.json
