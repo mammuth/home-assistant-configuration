@@ -22,7 +22,7 @@ updater:
 weblink:
   entities:
     - name: Pi-Hole Dashboard
-      url: http://raspi/admin/
+      url: http://192.167.178.33/admin/
       icon: mdi:chart-line
 
 
@@ -32,16 +32,19 @@ mqtt:
 
 
 logger:
-  # default: info
   default: warn
+        #default: info
   logs:
-    custom_components.fritzbox_guestwifi: debug
+    homeassistant.components.google_assistant: debug
+    homeassistant.components.google_assistant.auth: debug
+    homeassistant.components.api: debug
+ #   custom_components.fritzbox_guestwifi: debug
     # homeassistant.components.recorder: debug  # Useful for heavy updates
-    homeassistant.components.device_tracker: warn
-    homeassistant.components.http: warn # fail2ban uses this log
-    homeassistant.core: warn
-    homeassistant.components.scene: info
-    homeassistant.components.intent_script: debug
+ #   homeassistant.components.device_tracker: warn
+ #   homeassistant.components.http: warn # fail2ban uses this log
+ #   homeassistant.core: warn
+ #   homeassistant.components.scene: info
+ #   homeassistant.components.intent_script: debug
 
 http:
   api_password: !secret api_password
@@ -60,6 +63,7 @@ tts:
   platform: google
   language: de
 
+google_assistant: !include google_assistant.yaml
 
 device_tracker:
   # - platform: owntracks
@@ -68,12 +72,12 @@ device_tracker:
     password: !secret fritzbox_password
     track_new_devices: no
     interval_seconds: 10
-    consider_home: 15  # Needs to be at least `interval_seconds`
-
+    consider_home: 20  # Needs to be at least `interval_seconds`
 
 hue:
   bridges:
     - host: !secret var_ip_hue
+
 
 
 # remote:
@@ -81,19 +85,22 @@ hue:
 #     host: !secret var_ip_ir_remote
 #     token: YOUR_TOKEN
 
-
 media_player:
-  - platform: cast
-    host: !secret var_ip_soundbar
-
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_secret
+  - platform: songpal
+    name: Soundbar
+    endpoint: !secret var_soundbar_songpal
 
 snips:
+  feedback_sounds: true
+
+shopping_list:
 
 # python_script:
 
+light: !include light.yaml
 alexa: !include alexa.yaml
 intent_script: !include intent_script.yaml
 automation: !include automations.yaml

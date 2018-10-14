@@ -1,0 +1,26 @@
+- platform: template
+  lights:
+    kitchen_leds:
+      entity_id: switch.tp_switch_1
+      friendly_name: Küchen LEDs
+      # value_template: "{{ switch.tp_switch_1 }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.tp_switch_1
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.tp_switch_1
+- platform: group
+  name: Kitchen Group
+  entities:
+    - light.kuche
+    - light.kitchen_leds
+- platform: group
+  name: Wohnraum
+  entities:
+    - light.wohnzimmer
+    - light.esstisch
+    - light.leselampe
+    - light.kitchen_group
