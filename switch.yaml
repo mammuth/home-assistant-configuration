@@ -1,4 +1,4 @@
 - platform: tplink
-  name: plug_kitchen
-  friendly_name: "Küchensteckdose"
+  name: tp_switch_1
+  friendly_name: "Switch 1"
   host: 192.168.178.35

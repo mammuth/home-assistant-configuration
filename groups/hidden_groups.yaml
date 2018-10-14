@@ -6,9 +6,9 @@ humans:
     - device_tracker.thebeast
     - device_tracker.tv
 
-wohnraum:
-  name: Wohnraum
-  entities:
-    - light.wohnzimmer
-    - light.kuche
-    - light.esstisch
+# wohnraum:
+#   name: Wohnraum
+#   entities:
+#     - light.wohnzimmer
+#     - light.kuche
+#     - light.esstisch

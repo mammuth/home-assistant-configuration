@@ -5,7 +5,6 @@ smart_home:
         - input_boolean
         - light
         - scene
-        - switch
       include_entities:
         - group.wohnraum
         - group.all_lights
@@ -22,6 +21,5 @@ smart_home:
         display_categories: SWITCH
       input_boolean.vacation_mode:
         display_categories: SWITCH
-            #   light.kitchen:
-    #     name: Custom Name for Alexa
-    #     description: The light in the kitchen
+      light.kitchen_group:
+        name: Küche

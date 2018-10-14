@@ -1,108 +1,77 @@
-# Switches
 switch.plug_kitchen:
   friendly_name: Küchensteckdose
-
-# Sensors
 sensor.pihole_dns_queries_today:
   icon: mdi:web
   friendly_name: DNS Queries Total
-  unit_of_measurement: "Queries"
+  unit_of_measurement: Queries
 sensor.pihole_ads_blocked_today:
-  unit_of_measurement: "Queries"
+  unit_of_measurement: Queries
   friendly_name: DNS Queries Blocked
 sensor.pihole_ads_percentage_blocked_today:
-  unit_of_measurement: "%"
+  unit_of_measurement: '%'
   friendly_name: Blocked Percentage
-
-
-# Devices
 device_tracker.tv:
   icon: mdi:television
-
 device_tracker.thebeast:
   icon: mdi:desktop-tower
-
 device_tracker.max_laptop:
   icon: mdi:laptop-chromebook
-
-
-# Scripts
 script.romantic_bedroom:
   icon: mdi:heart
-
 script.start_coffee_machine:
   icon: mdi:coffee
-
 script.soundbar_say:
   icon: mdi:volume-high
-
 script.run_speedtest:
   icon: mdi:speedometer
-
-# Scenes
 scene.nachtlicht_scene:
   friendly_name: Nachtlicht Szene
   icon: mdi:hotel
-
 scene.nachtlicht_10m:
   friendly_name: Nachtlicht aus in 10m
   icon: mdi:sleep
-
 scene.tv_scene:
   friendly_name: TV
   icon: mdi:television
-
 scene.living_room_warm_scene:
   friendly_name: Wohnraum Warm
   icon: mdi:sofa
-
 scene.living_room_cold_scene:
   friendly_name: Wohnraum Hell
   icon: mdi:sofa
-
 scene.living_room_romantic_scene:
   friendly_name: Dinner
   icon: mdi:glass-tulip
-
-# Lights
-light.leselampe:
-  icon: mdi:ceiling-light
-
-
-# Admin View
 group.all_scenes:
   friendly_name: Alle Szenen
   hidden: false
-
 group.all_automations:
   friendly_name: Alle Automatisierungen
   hidden: false
-
 group.all_scripts:
   friendly_name: Alle Skripte
   control: hidden
   hidden: false
-
 group.all_devices:
   friendly_name: Alle Geräte
   hidden: false
-
 group.all_lights:
   friendly_name: Alle Lichter
   hidden: false
-
 group.all_switches:
-  friendly_name: "Alle Plugs / Switches"
+  friendly_name: Alle Plugs / Switches
   control: hidden
   hidden: false
-
-
-# View Order
 group.default_view:
   order: 0
-
 group.admin_view:
   order: 1
-
 group.pi_view:
   order: 2
+
+light.leselampe:
+  icon: mdi:ceiling-light
+light.kuche:
+  friendly_name: Küchenlicht
+light.kitchen_group:
+  friendly_name: Küche
