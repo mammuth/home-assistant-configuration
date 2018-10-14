@@ -7,7 +7,7 @@ default_view:
     - group.wohnraum_card
     - group.schlafzimmer
     - script.romantic_bedroom
-    - media_player.spotify
+    - media_player.soundbar
 
 
 admin_view:
@@ -24,6 +24,10 @@ admin_view:
     - ǵroup.pi_hole
     - group.admin_misc
     - group.admin_scenes
+    - media_player.chromecast
+    - media_player.soundbar_cast
+    - media_player.soundbar
+    - media_player.spotify
 
 
 pi_view:

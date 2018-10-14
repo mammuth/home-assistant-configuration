@@ -13,13 +13,14 @@
   entities:
     light.nachtlicht: 
       state: off
-      transition: 600
+      transition: 1200  # 20 minutes
 
 
 - name: tv_scene
   entities:
-    light.kuche: off
+    light.kitchen_group: off
     light.esstisch: off
+    light.leselampe: off
     light.couchlampe:
       state: on
       brightness: 130
@@ -34,7 +35,7 @@
 
 - name: living_room_warm_scene
   entities:
-    light.kuche: off
+    light.kitchen_group: off
     light.wohnzimmer:
       state: on
       brightness: 255

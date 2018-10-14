@@ -11,6 +11,7 @@ schlafzimmer:
     - light.schlafzimmer
     - scene.nachtlicht_scene
     - scene.nachtlicht_10m
+    - script.romantic_bedroom
 
 
 wohnraum_card:
@@ -18,7 +19,7 @@ wohnraum_card:
   entities:
     - light.wohnzimmer
     - light.esstisch
-    - light.kuche
+    - light.kitchen_group
     - light.leselampe
     - scene.tv_scene
     - scene.living_room_warm_scene
@@ -50,12 +51,13 @@ pi_sensors:
 
 
 pi_hole:
-  name: DNS AdBlock
+  name: DNS AdBlock!
   entities:
     - sensor.pihole_dns_queries_today
     - sensor.pihole_ads_blocked_today
     - sensor.pihole_ads_percentage_blocked_today
     - sensor.pihole_dns_queries_cached
+    - sensor.pihole_dns_unique_clients
     - weblink.pihole_dashboard
 
 

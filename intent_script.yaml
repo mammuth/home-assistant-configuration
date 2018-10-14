@@ -115,3 +115,13 @@ NextSong:
 currentTime:
   speech:
     text: Es ist {{ states.sensor.time.state }}
+
+
+# Shopping List
+AddItemToShoppingList:
+  action:
+    - service: shopping_list.add_item
+      data_template:
+        name: "{{ item }}"
+  speech:
+    text: "{{ item }} ist auf deiner Liste"

@@ -104,19 +104,8 @@
     entity_id: device_tracker.tv
     from: 'not_home'
     to: 'home'
-  condition:
-    # Soundbar ist durch den Cast-Standby wohl immer Home?
-    # - condition: state
-    #   entity_id: device_tracker.soundbar
-    #   state: 'not_home'
   action:
-    # Wait 10s in order to give room to stop Spotify. 
-    # In case the Echo is connected to the Soundbar, this should change to the Google Cast Input and to the TV input afterwards.
-    # Hopefully.
-    - delay: 00:00:10
-    # ToDo: Use wait instead of delay? https://home-assistant.io/docs/scripts/#wait
-    # - wait_template: '{{ states.climate.kitchen.attributes.valve < 10 }}'
-    #   timeout: 00:00:30
+    - delay: 00:00:15
     - service: media_player.turn_on
       data:
         entity_id: media_player.soundbar
@@ -133,6 +122,47 @@
     service: media_player.media_pause
     data:
       entity_id: media_player.spotify
+
+
+
+
+- alias: 'Spotify @Wohnzimmer -> Soundbar Bluetooth'
+  id: 'spotify_on__soundbar_bluetooth'
+  trigger:
+    platform: state
+    entity_id: media_player.spotify
+    to: playing
+
+  condition:
+    condition: template
+    value_template: '{{ states.media_player.spotify.attributes.source == "Echo Wohnzimmer" }}'
+
+  action:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.soundbar
+    - delay: 00:00:15
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.soundbar
+        source: "Bluetooth Audio"
+
+
+
+- alias: 'Spotify @Wohnzimmer aus -> Soundbar off'
+  id: 'spotify_off__soundbar_off'
+  trigger:
+    platform: state
+    entity_id: media_player.spotify
+    to: paused
+  condition:
+    condition: template
+    value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth Audio" }}'
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.soundbar
+
 
 
 - alias: 'TV on -> Dim lights'
@@ -280,7 +310,7 @@
         message: "Turned off all lights again"
 
 
-- alias: "Alarm clock ringing -> Living Room Lights on"
+- alias: "Alarm clock ringing -> Lights on"
   id: 'alarm_ringing__lights_on'
   trigger: 
     platform: state
@@ -293,27 +323,75 @@
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: 'off'
+      - condition: time
+        after: '04:00:00'
+        before: '12:01:00'
       - condition: sun
         before: sunrise
         before_offset: "1:30:00"  # ToDo: Verify that this offset is working
   action:
     - service: scene.turn_on
       entity_id: scene.living_room_cold_scene
+    - service: light.turn_on
+      data:
+        entity_id: light.nachtlicht
+        color_name: white
+        brightness_pct: 100
 
 
-- alias: "Alarm clock ringing -> Coffee machine on"
-  id: 'alarm_ringing__coffee_machine_on'
+- alias: "Alarm clock ringing -> Turn off ringing flag again"
+  id: 'alarm_ringing__reset_flag'
   trigger: 
     platform: state
     entity_id: input_boolean.alarm_clock_ringing
-    from: 'on'
-    to: 'off'
-  condition:
-    - condition: state
-      entity_id: input_boolean.vacation_mode
-      state: 'off'
+    from: 'off'
+    to: 'on'
   action:
-    service: script.start_coffee_machine
+    - delay: 00:00:10
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.alarm_clock_ringing
+
+
+- alias: "Alarm clock ringing -> Start Music"
+  id: 'alarm_ringing__start_music'
+  trigger: 
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+      - condition: time
+        after: '04:00:00'
+        before: '12:01:00'
+  action:
+    - delay: 00:02:00
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.spotify
+        volume_level: 0.5
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Wohnung
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify
+        shuffle: true
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify
+        shuffle: true
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.spotify
+        media_content_type: 'playlist'
+        media_content_id: 'spotify:user:mammuthroid:playlist:6GdskPZ2GqgyBZe4ArV83F'
 
 
 - alias: "Theresa Arrives -> Notify Max"
