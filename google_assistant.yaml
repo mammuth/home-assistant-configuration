@@ -1,0 +1,39 @@
+project_id: !secret google_assistant_project_id
+client_id: !secret google_client_id
+access_token: !secret google_access_token
+agent_user_id: !secret google_agent_user_id
+api_key: !secret google_homegraph_api_key
+exposed_domains:
+  - light
+  - scene
+  - input_boolean        
+entity_config:
+  # group.wohnraum:
+  #   expose: true
+  # group.all_lights:
+  #   expose: true
+  script.romantic_bedroom:
+    expose: true
+
+  light.essen1:
+    expose: false
+  light.essen2:
+    expose: false
+  light.essen3:
+    expose: false
+  light.kueche1:
+    expose: false
+  light.kueche2:
+    expose: false
+  
+  light.kitchen_group:
+    name: Küche
+
+  input_boolean.alarm_clock_ringing:
+    expose: false
+  input_boolean.alarm_clock_in_50m:
+    expose: false
+  group.schlafzimmer:
+    expose: false  # We already have a light.schlafzimmer
+  scene.nachtlicht_10m:
+    expose: false
