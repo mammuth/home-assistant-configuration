@@ -5,20 +5,19 @@
       entity_id: group.humans
       from: 'home'
       to: 'not_home'
-      
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.nachtlicht
+        state: 'on'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: time
+        after: '21:00:00'
+        before: '06:00:00'
   action:
-    - condition: state
-      entity_id: light.nachtlicht
-      state: 'on'
-
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-
-    - condition: time
-      after: '21:00:00'
-      before: '06:00:00'
-
     - service: scene.turn_on
       entity_id: scene.nachtlicht_10m
 
@@ -30,19 +29,19 @@
       entity_id: light.nachtlicht
       from: 'not_home'
       to: 'home'
-      
+  condition:
+    condition: and
+    conditions:    
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+      - condition: time
+        after: '22:00:00'
+        before: '06:00:00'  
   action:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-
-    - condition: time
-      after: '22:00:00'
-      before: '06:00:00'
-
     - service: scene.turn_on
       entity_id: scene.nachtlicht_10m
-
     - service: notify.html5
       data:
         title: "Noch 10 Minuten!"
@@ -56,16 +55,16 @@
       entity_id: light.nachtlicht
       from: 'not_home'
       to: 'home'
-      
+  condition:
+    condition: and
+    conditions:      
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: time
+        after: '22:00:00'
+        before: '06:00:00'
   action:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-
-    - condition: time
-      after: '22:00:00'
-      before: '06:00:00'
-
     - service: scene.turn_on
       entity_id: scene.nachtlicht_scene
 
@@ -109,6 +108,11 @@
     - service: media_player.turn_on
       data:
         entity_id: media_player.soundbar
+    - delay: 00:00:15
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.soundbar
+        source: TV
 
 
 - alias: 'TV on -> Spotify off'
@@ -156,8 +160,13 @@
     entity_id: media_player.spotify
     to: paused
   condition:
-    condition: template
-    value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth Audio" }}'
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth Audio" }}'
+      - condition: state
+        entity_id: device_tracker.tv
+        state: 'not_home'  
   action:
     - service: media_player.turn_off
       data:
@@ -183,13 +192,16 @@
   #     - condition: state
   #       entity_id: light.wohnzimmer
   #       state: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
   action:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
     # ToDo: Make ”scene' for this?
     - service: scene.turn_on
-      entity_id: scene.tv_scene
+      entity_id: scene.tv
 
 
 - alias: 'Living Room Lights on -> TV scene (if TV on)'
@@ -205,9 +217,9 @@
         state: 'home'
   action:
     - service: scene.turn_on
-      entity_id: scene.tv_scene
+      entity_id: scene.tv
 
-- alias: 'TV off -> Bright lights'
+- alias: 'TV off -> Cozy lights'
   id: 'tv_off__lights_bright'
   trigger:
     platform: state
@@ -225,7 +237,7 @@
         state: 'on'
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_cold_scene
+      entity_id: scene.cozy_lights
 
 
 - alias: "Device (MacBook) turned on, while Max was away"
@@ -318,7 +330,7 @@
     from: 'off'
     to: 'on'
   condition:
-    condition: and 
+    condition: and
     conditions:
       - condition: state
         entity_id: input_boolean.vacation_mode
@@ -326,17 +338,11 @@
       - condition: time
         after: '04:00:00'
         before: '12:01:00'
-      - condition: sun
-        before: sunrise
-        before_offset: "1:30:00"  # ToDo: Verify that this offset is working
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_cold_scene
-    - service: light.turn_on
-      data:
-        entity_id: light.nachtlicht
-        color_name: white
-        brightness_pct: 100
+      entity_id: scene.cozy_lights
+    - service: scene.turn_on
+      entity_id: scene.aufwachen
 
 
 - alias: "Alarm clock ringing -> Turn off ringing flag again"
@@ -371,10 +377,10 @@
         before: '12:01:00'
   action:
     - delay: 00:02:00
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.spotify
-        volume_level: 0.5
+    # - service: media_player.volume_set
+    #   data:
+    #     entity_id: media_player.spotify
+    #     volume_level: 0.5
     - service: media_player.select_source
       data:
         entity_id: media_player.spotify
@@ -455,15 +461,18 @@
     entity_id: group.humans
     from: 'not_home'
     to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: time
+        after: '17:00:00'
+        before: '04:00:00'
   action:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    - condition: time
-      after: '17:00:00'
-      before: '06:00:00'
     - service: scene.turn_on
-      entity_id: scene.living_room_warm_scene
+      entity_id: scene.cozy_lights
 
 
 
@@ -516,3 +525,21 @@
     to: 'off'
   action:
     - service: fritzbox_guestwifi.turn_off
+
+
+- alias: "Dinner Scene -> Music"
+  trigger:
+    platform: event
+    event_type: call_service
+    event_data:
+      service_data:
+        entity_id: scene.dinner
+      domain: scene
+      service: turn_on
+  action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Echo Wohnzimmer
+    - service: script.turn_on
+      entity_id: script.play_romantic_music

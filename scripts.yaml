@@ -1,18 +1,13 @@
-romantic_bedroom:
-  alias: "Sexy Times"
+play_romantic_music:
+  # Set the source before manually
+  alias: Romantic Music
   sequence:
-
-    - service: scene.turn_on
-      entity_id: scene.nachtlicht_scene
-    
-    - alias: Select the Echo Schlafzimmer as Source for Spotify
-      service: media_player.select_source
+    - service: media_player.shuffle_set
       data:
         entity_id: media_player.spotify
-        source: Echo Schlafzimmer
-    
-    - alias: Spotify Select Romantic Playlist
-      service: media_player.play_media
+        shuffle: true
+
+    - service: media_player.play_media
       data:
         entity_id: media_player.spotify
         media_content_type: 'playlist'
@@ -23,20 +18,31 @@ romantic_bedroom:
               "spotify:user:millicha:playlist:2QUuRivfo37ZY52jormsH9", 
               "spotify:user:francescodigilio:playlist:1LCcGqHXN1G7jp4cLHagSb",
               "spotify:user:spotify:playlist:37i9dQZF1DX4s3V2rTswzO",
-             ] -%}
+            ] -%}
             {% set index =  (range(0, (playlists | length - 1 ) )|random) -%}
             {{ playlists[index] }}
 
-    - service: shell_command.shuffle_spotify
+    # - service: media_player.media_next_track
+    #   data:
+    #     entity_id: media_player.spotify
 
-    - alias: Next track (so we don't always hear the same song at the beginning)
-      service: media_player.media_next_track
+    # - service: media_player.volume_set
+    #   data:
+    #     entitiy_id: media_player.spotify  # Doesn't work when applying it directly to spotify?
+    #     volume_level: 0.5
 
-    - alias: Set Spotify Volume
-      service: media_player.volume_set
+
+romantic_bedroom:
+  alias: "Sexy Times"
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.nachtlicht_scene
+    - service: media_player.select_source
       data:
-        entitiy_id: media_player.spotify  # Doesn't work when applying it directly to spotify?
-        volume_level: 0.5
+        entity_id: media_player.spotify
+        source: Echo Schlafzimmer
+    - service: script.turn_on
+      entity_id: script.play_romantic_music
 
 
 # Generic script for TTS via the soundbar. Doesn't say anything when TV is on. Provide volume and message

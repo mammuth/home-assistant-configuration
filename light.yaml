@@ -12,11 +12,13 @@
         service: switch.turn_off
         data:
           entity_id: switch.tp_switch_1
+
 - platform: group
   name: Kitchen Group
   entities:
     - light.kuche
     - light.kitchen_leds
+    
 - platform: group
   name: Wohnraum
   entities:
@@ -24,3 +26,4 @@
     - light.esstisch
     - light.leselampe
     - light.kitchen_group
+    - light.deckenlampe

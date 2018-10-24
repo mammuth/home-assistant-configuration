@@ -24,6 +24,7 @@ def setup(hass, config):
 
     hass.services.register(DOMAIN, 'turn_on', guest_wifi.turn_on)
     hass.services.register(DOMAIN, 'turn_off', guest_wifi.turn_off)
+    hass.services.register(DOMAIN, 'reconnect', guest_wifi.reconnect_fritzbox)
     return True
 
 
@@ -38,6 +39,10 @@ class FritzBoxGuestWifi(object):
             user=username,
             password=password
         )
+
+    def reconnect_fritzbox(self, call):
+        _LOGGER.info('Reconnicting the fritzbox.')
+        self._connection.reconnect()
 
     def turn_on(self, call):
         _LOGGER.info('Turning on guest wifi.')

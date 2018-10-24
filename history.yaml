@@ -13,7 +13,7 @@
 #     - sensor.pihole_dns_unique_domains
 #     # Lights
 #     - light.wohnzimmer
-#     - light.schlafzimmer
+#     - light.nachtlicht
 #     # Other
 #     - input_boolean.alarm_clock_ringing
 #   domains:

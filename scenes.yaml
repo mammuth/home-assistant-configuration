@@ -1,12 +1,19 @@
 - name: nachtlicht_scene
   entities:
-    group.wohnraum:
-      state: off
-      transition: 60
+    light.wohnraum: off
     light.nachtlicht: 
       state: on
       brightness: 10
       color_name: red
+
+
+- name: Aufwachen
+  entities:
+    light.nachtlicht:
+      state: on
+      brightness_pct: 100
+      kelvin: 3000
+      transition: 30
 
 
 - name: nachtlicht_10m
@@ -16,57 +23,58 @@
       transition: 1200  # 20 minutes
 
 
-- name: tv_scene
+- name: tv
   entities:
-    light.kitchen_group: off
-    light.esstisch: off
     light.leselampe: off
+    light.deckenlampe: off
+    light.esstisch: 
+      state: on
+      brightness_pct: 10
+      transition: 3
     light.couchlampe:
       state: on
-      brightness: 130
+      brightness_pct: 50
       color_name: orange
       transition: 5
     light.stehlampe:
       state: on
-      brightness: 100
+      brightness_pct: 40
       color_name: orange
       transition: 3
 
 
-- name: living_room_warm_scene
+- name: cozy_lights
   entities:
+    light.leselampe: off
     light.kitchen_group: off
     light.wohnzimmer:
       state: on
-      brightness: 255
-      kelvin: 2500
+      brightness_pct: 100
+      kelvin: 2100
       transition: 3
     light.esstisch:
       state: on
-      brightness: 150
+      brightness_pct: 75
+      transition: 3
+    light.deckenlampe:
+      state: on
+      brightness_pct: 85
       transition: 3
 
 
 
-- name: living_room_cold_scene
+- name: cleaning
   entities:
-    light.wohnzimmer:
+    light.wohnraum:
       state: on
-      brightness: 255
-      kelvin: 2500
-      transition: 3
-    light.esstisch:
-      state: on
-      brightness: 255
-      transition: 3
-    light.kuche:
-      state: on
-      brightness: 255
-      transition: 3
+      brightness_pct: 100
+      color_name: white
 
 
-- name: living_room_romantic_scene
+- name: dinner
   entities:
+    light.leselampe: off
+    light.deckenlampe: off
     light.wohnzimmer:
       state: on
       brightness: 255
@@ -76,3 +84,25 @@
       state: on
       brightness: 100
       transition: 3
+
+
+- name: reading
+  entities:
+    light.kitchen_group: off
+    light.leselampe:
+      state: on
+      brightness_pct: 85
+    light.esstisch:
+      state: on
+      brightness_pct: 60
+      transition: 2
+    light.couchlampe:
+      state: on
+      brightness_pct: 70
+      color_name: orange
+      transition: 3
+    light.stehlampe:
+      state: on
+      brightness_pct: 50
+      color_name: orange
+      transition: 2

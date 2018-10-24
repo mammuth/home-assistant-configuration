@@ -1,0 +1,29 @@
+# gallery: https://home-assistant-lovelace-gallery.netlify.com/#
+
+title: My Awesome Home
+
+views:
+    # View tab title.
+  - title: Example
+    # Optional unique id for direct access /lovelace/${id}
+    id: example
+    cards:
+      - type: markdown
+        title: Lovelace
+        content: >
+          Welcome to your **Lovelace UI**.
+      - type: entities
+        # Title of the entities card
+        title: Example
+        # The entities here will be shown in the same order as specified.
+        # Each entry is an entity ID or a map with extra options.
+        entities:
+          - light.wohnraum
+          - entity: light.kitchen_group
+            # Override the name to use
+            name: Küchenmonster
+      - type: entity-filter
+        entities:
+          - device_tracker.max_smartphone
+        state_filter:
+          - not_home

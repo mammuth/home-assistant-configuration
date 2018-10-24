@@ -13,7 +13,7 @@ sun:
 frontend:
   javascript_version: latest
   themes: !include themes.yaml
-discovery:
+# discovery:
 config:
 updater:
   include_used_components: true # Allows Home Assistant developers to focus on popular components.
@@ -33,11 +33,10 @@ mqtt:
 
 logger:
   default: warn
-        #default: info
-  logs:
-    homeassistant.components.google_assistant: debug
-    homeassistant.components.google_assistant.auth: debug
-    homeassistant.components.api: debug
+  # logs:
+  #   homeassistant.components.google_assistant: debug
+  #   homeassistant.components.google_assistant.auth: debug
+  #   homeassistant.components.api: debug
  #   custom_components.fritzbox_guestwifi: debug
     # homeassistant.components.recorder: debug  # Useful for heavy updates
  #   homeassistant.components.device_tracker: warn
@@ -59,11 +58,11 @@ http:
     - !secret var_ip_theresa_smartphone
 
 
-tts:
-  platform: google
-  language: de
+# tts:
+#   platform: google
+#   language: de
 
-google_assistant: !include google_assistant.yaml
+# google_assistant: !include google_assistant.yaml
 
 device_tracker:
   # - platform: owntracks
@@ -93,16 +92,16 @@ media_player:
     name: Soundbar
     endpoint: !secret var_soundbar_songpal
 
-snips:
-  feedback_sounds: true
+# snips:
+#   feedback_sounds: true
 
-shopping_list:
+# shopping_list:
 
 # python_script:
 
 light: !include light.yaml
 alexa: !include alexa.yaml
-intent_script: !include intent_script.yaml
+# intent_script: !include intent_script.yaml
 automation: !include automations.yaml
 group: !include_dir_merge_named groups
 history: !include history.yaml
@@ -113,7 +112,7 @@ recorder: !include recorder.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include sensors.yaml
-shell_command: !include shell_commands.yaml
+# shell_command: !include shell_commands.yaml
 switch: !include switch.yaml
 
 # Custom Components

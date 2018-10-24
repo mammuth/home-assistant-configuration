@@ -6,17 +6,13 @@ smart_home:
         - light
         - scene
       include_entities:
-        - group.wohnraum
         - group.all_lights
         - script.romantic_bedroom
       exclude_entities:
         - input_boolean.alarm_clock_ringing
         - input_boolean.alarm_clock_in_50m
-        - group.schlafzimmer  # We already have a light.schlafzimmer
         - scene.nachtlicht_10m
     entity_config:
-      group.wohnraum:
-        display_categories: LIGHT
       input_boolean.guest_mode:
         display_categories: SWITCH
       input_boolean.vacation_mode:

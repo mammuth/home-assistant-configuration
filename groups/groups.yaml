@@ -5,26 +5,35 @@
 #     - sensor.u6_uni
 
 
-schlafzimmer:
+schlafzimmer_card:
   name: Schlafzimmer
+  control: hidden
   entities:
-    - light.schlafzimmer
     - scene.nachtlicht_scene
     - scene.nachtlicht_10m
     - script.romantic_bedroom
+    - light.nachtlicht
 
 
 wohnraum_card:
-  name: Wohnraum
+  name: Wohnraum Szenen
+  control: hidden
   entities:
-    - light.wohnzimmer
-    - light.esstisch
+    - scene.cozy_lights
+    - scene.tv
+    - scene.reading
+    - scene.cleaning
+    - scene.dinner
+
+
+wohnraum_lamps_card:
+  name: Wohnraum Einzellampen
+  entities:
     - light.kitchen_group
+    - light.deckenlampe
+    - light.esstisch
     - light.leselampe
-    - scene.tv_scene
-    - scene.living_room_warm_scene
-    - scene.living_room_cold_scene
-    - scene.living_room_romantic_scene
+    - light.wohnzimmer
 
 
 people:
@@ -81,7 +90,7 @@ admin_scenes:
   entities:
     - scene.nachtlicht_scene
     - scene.nachtlicht_10m
-    - scene.tv_scene
-    - scene.living_room_warm_scene
-    - scene.living_room_cold_scene
-    - scene.living_room_romantic_scene
+    - scene.tv
+    - scene.cozy_lights
+    - scene.cleaning
+    - scene.dinner

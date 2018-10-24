@@ -5,7 +5,8 @@ default_view:
     - group.people
     # - group.departures
     - group.wohnraum_card
-    - group.schlafzimmer
+    - group.wohnraum_lamps_card
+    - group.schlafzimmer_card
     - script.romantic_bedroom
     - media_player.soundbar
 

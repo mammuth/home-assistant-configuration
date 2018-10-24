@@ -9,11 +9,10 @@ exclude:
     - group.people
     
     - light.wohnzimmer
-    - light.schlafzimmer
     - light.kueche1
     - light.kueche2
-    - light.essen1
-    - light.essen2
-    - light.essen3
+    - light.decke1
+    - light.decke2
+    - light.decke3
   domains:
     - persistent_notification

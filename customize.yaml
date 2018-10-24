@@ -1,5 +1,8 @@
+# Switchs
 switch.plug_kitchen:
   friendly_name: Küchensteckdose
+
+# Sensors
 sensor.pihole_dns_queries_today:
   icon: mdi:web
   friendly_name: DNS Queries Total
@@ -10,12 +13,16 @@ sensor.pihole_ads_blocked_today:
 sensor.pihole_ads_percentage_blocked_today:
   unit_of_measurement: '%'
   friendly_name: Blocked Percentage
+
+# Device Tracker
 device_tracker.tv:
   icon: mdi:television
 device_tracker.thebeast:
   icon: mdi:desktop-tower
 device_tracker.max_laptop:
   icon: mdi:laptop-chromebook
+
+# Scripts
 script.romantic_bedroom:
   icon: mdi:heart
 script.start_coffee_machine:
@@ -24,24 +31,31 @@ script.soundbar_say:
   icon: mdi:volume-high
 script.run_speedtest:
   icon: mdi:speedometer
+
+# Scenes
 scene.nachtlicht_scene:
-  friendly_name: Nachtlicht Szene
+  friendly_name: Schlafen
   icon: mdi:hotel
 scene.nachtlicht_10m:
   friendly_name: Nachtlicht aus in 10m
   icon: mdi:sleep
-scene.tv_scene:
+scene.tv:
   friendly_name: TV
   icon: mdi:television
-scene.living_room_warm_scene:
-  friendly_name: Wohnraum Warm
+scene.cozy_lights:
+  friendly_name: Gemütliches Licht
   icon: mdi:sofa
-scene.living_room_cold_scene:
-  friendly_name: Wohnraum Hell
-  icon: mdi:sofa
-scene.living_room_romantic_scene:
+scene.cleaning:
+  friendly_name: Putzen
+  icon: mdi:broom
+scene.dinner:
   friendly_name: Dinner
   icon: mdi:glass-tulip
+scene.reading:
+  friendly_name: Lesen
+  icon: mdi:book-open-page-variant
+
+# Groups
 group.all_scenes:
   friendly_name: Alle Szenen
   hidden: false
@@ -69,9 +83,17 @@ group.admin_view:
 group.pi_view:
   order: 2
 
+# Lights
 light.leselampe:
+  icon: mdi:desk-lamp
+light.esstisch:
   icon: mdi:ceiling-light
-light.kuche:
-  friendly_name: Küchenlicht
+light.deckenlampe:
+  icon: mdi:spotlight-beam
 light.kitchen_group:
   friendly_name: Küche
+  icon: mdi:pot-mix
+light.kuche:
+  friendly_name: Küchenlicht
+light.wohnzimmer:
+  icon: mdi:sofa
