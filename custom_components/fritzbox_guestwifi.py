@@ -41,7 +41,7 @@ class FritzBoxGuestWifi(object):
         )
 
     def reconnect_fritzbox(self, call):
-        _LOGGER.info('Reconnicting the fritzbox.')
+        _LOGGER.info('Reconnecting the fritzbox.')
         self._connection.reconnect()
 
     def turn_on(self, call):
