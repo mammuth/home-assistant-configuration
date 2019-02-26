@@ -8,10 +8,11 @@ smart_home:
       include_entities:
         - group.all_lights
         - script.romantic_bedroom
+        - script.bathroom_music
       exclude_entities:
         - input_boolean.alarm_clock_ringing
         - input_boolean.alarm_clock_in_50m
-        - scene.nachtlicht_10m
+        # - scene.nachtlicht_10m
     entity_config:
       input_boolean.guest_mode:
         display_categories: SWITCH

@@ -31,6 +31,17 @@ play_romantic_music:
     #     entitiy_id: media_player.spotify  # Doesn't work when applying it directly to spotify?
     #     volume_level: 0.5
 
+turn_on_soundbar_bluetooth:
+  alias: "Turn on soundbar and bluetooth aka. try to force to connect Echo to it"
+  sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.soundbar
+    - delay: 00:00:15
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.soundbar
+        source: "Bluetooth Audio"
 
 romantic_bedroom:
   alias: "Sexy Times"
@@ -43,6 +54,23 @@ romantic_bedroom:
         source: Echo Schlafzimmer
     - service: script.turn_on
       entity_id: script.play_romantic_music
+
+bathroom_music:
+  alias: "Pupsmusik"
+  sequence:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Echo Wohnzimmer
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify
+        shuffle: true
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.spotify
+        media_content_type: 'playlist'
+        media_content_id: 'spotify:user:mammuthroid:playlist:6GdskPZ2GqgyBZe4ArV83F'
 
 
 # Generic script for TTS via the soundbar. Doesn't say anything when TV is on. Provide volume and message
@@ -101,3 +129,8 @@ run_speedtest:
   alias: "Run Speedtest"
   sequence:
     - service: sensor.update_speedtest
+
+hassio_google_backup:
+  alias: Google Drive Backup durchführen
+  sequence:
+    - service: rest_command.hassio_google_backup

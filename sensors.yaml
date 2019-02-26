@@ -30,7 +30,7 @@
       arg: /
     - type: memory_use_percent
     - type: processor_use
-    - type: since_last_boot
+    - type: last_boot
     - type: load_1m
     - type: load_5m
     - type: load_15m
@@ -44,15 +44,15 @@
   value_template: '{{ value | multiply(0.001) }}'
 
 
-- platform: pi_hole
-  name: Pi-hole
-  unit_of_measurement: "%"
-  monitored_conditions:
-    - dns_queries_today
-    - ads_blocked_today
-    - ads_percentage_today
-    - queries_cached
-    - unique_clients
+# - platform: pi_hole
+#   name: Pi-hole
+#   unit_of_measurement: "%"
+#   monitored_conditions:
+#     - dns_queries_today
+#     - ads_blocked_today
+#     - ads_percentage_today
+#     - queries_cached
+#     - unique_clients
 
 - platform: time_date
   display_options:
@@ -69,3 +69,16 @@
 #     - ping
 #     - download
 #     - upload
+
+- platform: template
+  sensors:
+    spotify_source:
+      value_template: '{{ states.media_player.spotify.attributes["source"] }}'
+      friendly_name: 'Spotify Source'
+
+
+- platform: template
+  sensors:
+    spotify_source:
+      value_template: '{{ states.media_player.spotify.attributes["source"] }}'
+      friendly_name: 'Spotify Source'

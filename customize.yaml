@@ -31,13 +31,15 @@ script.soundbar_say:
   icon: mdi:volume-high
 script.run_speedtest:
   icon: mdi:speedometer
+script.hassio_google_backup:
+  icon: mdi:cloud-upload
 
 # Scenes
 scene.nachtlicht_scene:
   friendly_name: Schlafen
   icon: mdi:hotel
 scene.nachtlicht_10m:
-  friendly_name: Nachtlicht aus in 10m
+  friendly_name: Einschlafen
   icon: mdi:sleep
 scene.tv:
   friendly_name: TV
@@ -54,6 +56,9 @@ scene.dinner:
 scene.reading:
   friendly_name: Lesen
   icon: mdi:book-open-page-variant
+scene.bedroom_bright:
+  friendly_name: Schlafzimmer hell
+  icon: mdi:lightbulb-on
 
 # Groups
 group.all_scenes:

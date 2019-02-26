@@ -9,6 +9,7 @@ default_view:
     - group.schlafzimmer_card
     - script.romantic_bedroom
     - media_player.soundbar
+    - media_player.spotify
 
 
 admin_view:
@@ -22,7 +23,7 @@ admin_view:
     - group.all_switches
     - group.humans
     - group.people
-    - ǵroup.pi_hole
+    - group.pi_hole
     - group.admin_misc
     - group.admin_scenes
     - media_player.chromecast

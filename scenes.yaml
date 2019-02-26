@@ -3,7 +3,7 @@
     light.wohnraum: off
     light.nachtlicht: 
       state: on
-      brightness: 10
+      brightness_pct: 50
       color_name: red
 
 
@@ -91,10 +91,10 @@
     light.kitchen_group: off
     light.leselampe:
       state: on
-      brightness_pct: 85
+      brightness_pct: 60
     light.esstisch:
       state: on
-      brightness_pct: 60
+      brightness_pct: 40
       transition: 2
     light.couchlampe:
       state: on
@@ -106,3 +106,12 @@
       brightness_pct: 50
       color_name: orange
       transition: 2
+
+
+
+- name: bedroom_bright
+  entities:
+    light.nachtlicht:
+      state: on
+      color_name: white
+      brightness_pct: 100

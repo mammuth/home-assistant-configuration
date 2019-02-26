@@ -8,6 +8,10 @@ homeassistant:
 
   customize: !include customize.yaml
 
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
+
 
 sun:
 frontend:
@@ -24,11 +28,17 @@ weblink:
     - name: Pi-Hole Dashboard
       url: http://192.167.178.33/admin/
       icon: mdi:chart-line
+    - name: Hassio Backup Addon UI
+      url: http://192.168.178.46:8055/gb/
+      icon: mdi:cloud-upload
+
 
 
 mqtt:
-  broker: 127.0.0.1
+  broker: !secret var_ip_mqtt_broker
   port: 1883
+  discovery: true
+  discovery_prefix: homeassistant
 
 
 logger:
@@ -48,8 +58,8 @@ logger:
 http:
   api_password: !secret api_password
   base_url: !secret base_url
-  ssl_certificate: !secret ssl_certificate
-  ssl_key: !secret ssl_key
+  # ssl_certificate: !secret ssl_certificate
+  # ssl_key: !secret ssl_key
   ip_ban_enabled: True
   login_attempts_threshold: 2
   trusted_networks: 
@@ -62,7 +72,7 @@ http:
 #   platform: google
 #   language: de
 
-# google_assistant: !include google_assistant.yaml
+google_assistant: !include google_assistant.yaml
 
 device_tracker:
   # - platform: owntracks
@@ -92,18 +102,12 @@ media_player:
     name: Soundbar
     endpoint: !secret var_soundbar_songpal
 
-# snips:
-#   feedback_sounds: true
-
-# shopping_list:
-
-# python_script:
 
 light: !include light.yaml
 alexa: !include alexa.yaml
 # intent_script: !include intent_script.yaml
 automation: !include automations.yaml
-group: !include_dir_merge_named groups
+# group: !include_dir_merge_named groups
 history: !include history.yaml
 input_boolean: !include_dir_merge_named input_boolean
 logbook: !include logbook.yaml
@@ -112,6 +116,7 @@ recorder: !include recorder.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
 # shell_command: !include shell_commands.yaml
 switch: !include switch.yaml
 
@@ -119,3 +124,68 @@ switch: !include switch.yaml
 fritzbox_guestwifi:
   username: !secret fritzbox_username
   password: !secret fritzbox_password
+
+hassio:
+system_health:
+
+panel_iframe:
+  ide:
+    title: IDE
+    icon: mdi:code-braces
+    url: !secret var_ide_url
+  portainer:
+    title: Portainer
+    icon: mdi:docker
+    url: !secret var_portainer_url
+  adguard:
+    title: AdGuard
+    icon: mdi:block-helper
+    url: !secret var_adguard_url
+
+shell_command:
+  lovelace_migrate: 'python3 /config/lovelace_migrate.py -c /config'
+
+
+person:
+  - name: Max
+    id: max
+    user_id: 281584ea78f64d79b4d71b6814ada37b
+    device_trackers:
+      - device_tracker.max_smartphone
+      - device_tracker.max_maxowntracks
+  - name: Theresa
+    id: theresa
+    user_id: 0bc097b44bc048f3a1b34442906d9b32
+    device_trackers:
+      - device_tracker.theresa_smartphone       
+      
+owntracks:
+  waypoints: false  # don't automatically publish owntracks regions as HA zones
+  max_gps_accuracy: 100  # Ignore reports with accuracy < x m
+  region_mapping:
+    home: home
+    blueshoe: blueshoe
+    uni: uni
+
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 100
+    icon: mdi:castle
+  - name: BLUESHOE
+    latitude: !secret max_work_latitude
+    longitude: !secret max_work_longitude
+    radius: 100
+    icon: mdi:briefcase-outline
+  - name: Uni
+    latitude: !secret uni_latitude
+    longitude: !secret uni_longitude
+    radius: 500
+    icon: mdi:school
+
+map:
+
+rest_command:
+  hassio_google_backup:
+    url: !secret hassio_google_backup_url
