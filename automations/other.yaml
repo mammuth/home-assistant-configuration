@@ -1,0 +1,85 @@
+- alias: IFTTT Webhook receiver
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: call_service
+  action:
+    service_template: '{{ trigger.event.data.service }}'
+    data_template:
+      entity_id: '{{ trigger.event.data.entity_id }}'
+  id: 01dad040eb5246618eb384f83317f72b
+
+
+- alias: Device (TheBeast) turned on, while Max was away
+  id: thebeast_on__while_max_away
+  trigger:
+    platform: state
+    entity_id: device_tracker.thebeast
+    from: not_home
+    to: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: device_tracker.max_smartphone
+    state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: TheBeast turned on
+      message: TheBeast was turned on and Max is not home
+
+
+- alias: Night -> Dark Theme
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '22:00'
+  action:
+  - service: frontend.set_theme
+    data:
+      name: midnight
+  id: a3ee7c18f5234c01abfbc76f00db43df
+
+
+- alias: Morning -> Main Theme
+  initial_state: true
+  trigger:
+  - platform: time
+    at: 07:00
+  action:
+  - service: frontend.set_theme
+    data:
+      name: default
+  id: 6a0f246b115348a49f52c54a90a5f733
+
+
+- alias: Guests -> Turn on guest wifi
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'on'
+  action:
+  - service: fritzbox_guestwifi.turn_on
+  - service: notify.pushbullet_max
+    data:
+      title: Gäste-Wlan ist jetzt an
+      message: 'Passwort: 01189998819991197253 as in https://www.youtube.com/watch?v=HWc3WY3fuZU'
+  - service: notify.pushbullet_theresa
+    data:
+      title: Gäste-Wlan ist jetzt an
+      message: 'Passwort: 01189998819991197253 as in https://www.youtube.com/watch?v=HWc3WY3fuZU'
+  id: 1c6a6a19a84c46fab55892167036821c
+
+
+- alias: Guests Away -> Turn off guest wifi
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'off'
+  action:
+  - service: fritzbox_guestwifi.turn_off
+  id: dce1cd19af0342beaa7ea709ad31a9a9

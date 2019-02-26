@@ -1,0 +1,93 @@
+- alias: Alarm clock ringing -> Turn off ringing flag again
+  id: alarm_ringing__reset_flag
+  trigger:
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'off'
+    to: 'on'
+  action:
+  - delay: 00:00:10
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.alarm_clock_ringing
+
+
+- alias: Alarm clock ringing -> Lights on
+  id: alarm_ringing__lights_on
+  trigger:
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+    - condition: time
+      after: 04:00:00
+      before: '12:01:00'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.cozy_lights
+  - service: scene.turn_on
+    entity_id: scene.aufwachen
+
+
+- alias: Alarm clock ringing -> Start Music
+  id: alarm_ringing__start_music
+  trigger:
+    platform: state
+    entity_id: input_boolean.alarm_clock_ringing
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+    - condition: time
+      after: 04:00:00
+      before: '12:01:00'
+  action:
+  - delay: 00:02:00
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.spotify
+      source: Alle Lautsprecher
+  - service: media_player.shuffle_set
+    data:
+      entity_id: media_player.spotify
+      shuffle: true
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_type: playlist
+      media_content_id: spotify:user:mammuthroid:playlist:6GdskPZ2GqgyBZe4ArV83F
+
+
+- alias: Alarm in 50m -> Wake Up Light
+  id: alarm_in_50m__wakeup_light
+  trigger:
+    platform: state
+    entity_id: input_boolean.alarm_clock_in_50m
+    from: 'off'
+    to: 'on'
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.alarm_clock_in_50m
+  - delay: 00:30:00
+  - service: light.turn_on
+    data:
+      entity_id: light.nachtlicht
+      brightness: 1
+      color_name: red
+  - service: light.turn_on
+    data:
+      entity_id: light.nachtlicht
+      brightness: 255
+      color_name: white
+      transition: 900

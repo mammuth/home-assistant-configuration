@@ -1,0 +1,130 @@
+- alias: TV on -> Soundbar on
+  id: tv_on__soundbar_on
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: not_home
+    to: home
+  action:
+  - delay: 00:00:15
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.soundbar
+  - delay: 00:00:15
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.soundbar
+      source: TV
+
+      
+- alias: TV on -> Spotify off
+  id: tv_on__spotify_off
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: not_home
+    to: home
+  action:
+    service: media_player.media_pause
+    data:
+      entity_id: media_player.spotify
+
+
+- alias: Spotify @Wohnzimmer -> Soundbar Bluetooth
+  id: spotify_on__soundbar_bluetooth
+  trigger:
+  - platform: state
+    entity_id: media_player.spotify
+    to: playing
+  - platform: state
+    entity_id: sensor.spotify_source
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ states.sensor.spotify_source.state in ["Echo Wohnzimmer",
+        "Alle Lautsprecher"] }}'
+    - condition: state
+      entity_id: media_player.spotify
+      state: playing
+  action:
+    service: script.turn_on
+    entity_id: script.turn_on_soundbar_bluetooth
+
+
+- alias: Spotify @Wohnzimmer aus -> Soundbar off
+  id: spotify_off__soundbar_off
+  trigger:
+    platform: state
+    entity_id: media_player.spotify
+    to: paused
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth
+        Audio" }}'
+    - condition: state
+      entity_id: device_tracker.tv
+      state: not_home
+  action:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.soundbar
+
+
+- alias: Theresa Arrives -> Notify Max
+  id: theresa_arrives__notify_max
+  trigger:
+    platform: state
+    entity_id: device_tracker.theresa_smartphone
+    from: not_home
+    to: home
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      after: '12:00:00'
+      before: 05:00:00
+    - condition: state
+      entity_id: device_tracker.max_smartphone
+      state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Theresa ist jetzt Zuhause
+      message: Theresa ist gleich Zuhause
+
+
+- alias: Dinner Scene -> Music
+  trigger:
+    platform: event
+    event_type: call_service
+    event_data:
+      service_data:
+        entity_id: scene.dinner
+      domain: scene
+      service: turn_on
+  action:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.spotify
+      source: Echo Wohnzimmer
+  - service: script.turn_on
+    entity_id: script.play_romantic_music
+  id: 9ff5bf4cd0924633b77fcb196fe44139
+
+
+- id: '1550734787910'
+  alias: Noone home -> Soundbar off
+  trigger:
+  - entity_id: binary_sensor.humans_home
+    for: 00:15:00
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: media_player.soundbar
+    service: homeassistant.turn_off

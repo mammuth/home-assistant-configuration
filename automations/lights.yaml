@@ -1,0 +1,196 @@
+- alias: Falling asleep -> Nightlight off
+  id: automatic_nightlight
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.humans_home
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: light.nachtlicht
+      state: 'on'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: time
+      after: '21:00:00'
+      before: 06:00:00
+  action:
+  - service: scene.turn_on
+    entity_id: scene.nachtlicht_10m
+
+
+- alias: Falling asleep -> Nightlight off (after turning on again)
+  id: automatic_nightlight_after_manual_turn_on
+  trigger:
+  - platform: state
+    entity_id: light.nachtlicht
+    from: not_home
+    to: home
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: time
+      after: '22:00:00'
+      before: 06:00:00
+  action:
+  - service: scene.turn_on
+    entity_id: scene.nachtlicht_10m
+  - service: notify.html5
+    data:
+      title: Noch 10 Minuten!
+      message: Das Nachtlicht geht in 10 Minuten aus. (Zweites Nachtlicht Timer)
+
+
+- alias: Sleeping Room light on at evening -> nightlight scene
+  id: sleeping_room_light_on__nightlight_scene_when_evening
+  trigger:
+  - platform: state
+    entity_id: light.nachtlicht
+    from: not_home
+    to: home
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: time
+      after: '22:00:00'
+      before: 06:00:00
+  action:
+  - service: scene.turn_on
+    entity_id: scene.nachtlicht_scene
+
+
+- id: humans_away__lights_off
+  alias: Away for 15m -> Lights off
+  trigger:
+  - entity_id: binary_sensor.humans_home
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    from: on.
+    platform: state
+    to: 'off'
+  condition:
+  - condition: and
+    conditions:
+    - after: 07:00:00
+      before: '21:00:00'
+      condition: time
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+  action:
+  - entity_id: group.all_lights
+    service: light.turn_off
+
+
+- alias: TV on -> Dim lights
+  id: tv_on__lights_dimmed
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: not_home
+    to: home
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+  - service: scene.turn_on
+    entity_id: scene.tv
+
+
+- alias: Living Room Lights on -> TV scene (if TV on)
+  id: living_room_lights_on__tv_scene
+  initial_state: false
+  trigger:
+    platform: state
+    entity_id: light.wohnzimmer
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: device_tracker.tv
+    state: home
+  action:
+  - service: scene.turn_on
+    entity_id: scene.tv
+- alias: TV off -> Cozy lights
+  id: tv_off__lights_bright
+  trigger:
+    platform: state
+    entity_id: device_tracker.tv
+    from: home
+    to: not_home
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      after: '21:30:00'
+      before: 02:00:00
+    - condition: state
+      entity_id: light.wohnzimmer
+      state: 'on'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.cozy_lights
+
+
+- alias: Turn on lights occasionally when on vacation
+  trigger:
+    platform: time
+    at: '21:32:00'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'on'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.stehlampe
+      brightness: 255
+      color: white
+  - service: notify.pushbullet_max
+    data:
+      title: Holiday Trap
+      message: Wohnzimmerlampe ist an für 2h
+  - delay: 02:00:00
+  - service: light.turn_off
+    entity_id: group.all_lights
+  - service: notify.pushbullet_max
+    data:
+      title: Holiday Trap
+      message: Turned off all lights again
+  id: e5409dd8ea5242b198fbdf06a945f487
+
+
+- alias: Coming home -> Lights On
+  id: coming_home__lights_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.humans_home
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: time
+      after: '17:00:00'
+      before: 04:00:00
+  action:
+  - service: scene.turn_on
+    entity_id: scene.cozy_lights

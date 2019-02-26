@@ -1,0 +1,59 @@
+- alias: Device (MacBook) turned on, while Max was away
+  id: laptop_on__while_max_away
+  trigger:
+    platform: state
+    entity_id: device_tracker.max_laptop
+    from: not_home
+    to: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: device_tracker.max_smartphone
+    state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Laptop turned on
+      message: MacBook was turned on and Max is not home
+
+
+- alias: Update Available Notification
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: persistent_notification.create
+    data:
+      title: Update verfügbar
+      message: Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases).
+        Update via `pip3 install --upgrade homeassistant`
+  id: d7648b1670b74d289bcf7f7b0adc7b97
+
+
+- alias: Theresa Arrives -> Notify Max
+  id: theresa_arrives__notify_max
+  trigger:
+    platform: state
+    entity_id: device_tracker.theresa_smartphone
+    from: not_home
+    to: home
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      after: '12:00:00'
+      before: 05:00:00
+    - condition: state
+      entity_id: device_tracker.max_smartphone
+      state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Theresa ist jetzt Zuhause
+      message: Theresa ist gleich Zuhause
+
+
+      
