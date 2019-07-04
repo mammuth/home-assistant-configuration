@@ -1,3 +1,5 @@
 - platform: tplink
-  name: tp_switch_1
-  host: 192.168.178.35
+  # discovery: false
+  # switch:
+  #   name: tp_switch_1
+  #   host: 192.168.178.35

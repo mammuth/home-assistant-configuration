@@ -11,6 +11,7 @@ homeassistant:
   auth_providers:
    - type: homeassistant
    - type: legacy_api_password
+     api_password: !secret api_password
 
 
 sun:
@@ -30,6 +31,9 @@ weblink:
       icon: mdi:chart-line
     - name: Hassio Backup Addon UI
       url: http://192.168.178.46:8055/gb/
+      icon: mdi:cloud-upload
+    - name: Hassio Backup Folder in Drive
+      url: https://drive.google.com/drive/u/0/folders/1Q0VZyc5cpcLHo7X7cIhk-WvkA2GG8sEE
       icon: mdi:cloud-upload
 
 
@@ -56,10 +60,10 @@ logger:
  #   homeassistant.components.intent_script: debug
 
 http:
-  api_password: !secret api_password
   base_url: !secret base_url
   # ssl_certificate: !secret ssl_certificate
   # ssl_key: !secret ssl_key
+  # api_password: !secret api_password
   ip_ban_enabled: True
   login_attempts_threshold: 2
   trusted_networks: 
@@ -92,7 +96,7 @@ hue:
 # remote:
 #   - platform: xiaomi_miio
 #     host: !secret var_ip_ir_remote
-#     token: YOUR_TOKEN
+#     token: !secret xiaomi_ir_remote_token
 
 media_player:
   - platform: spotify
@@ -101,12 +105,14 @@ media_player:
   - platform: songpal
     name: Soundbar
     endpoint: !secret var_soundbar_songpal
-
+  - platform: androidtv
+    name: Fire TV
+    host: !secret var_ip_firetv
 
 light: !include light.yaml
 alexa: !include alexa.yaml
 # intent_script: !include intent_script.yaml
-automation: !include automations.yaml
+automation: !include_dir_merge_list automations/
 # group: !include_dir_merge_named groups
 history: !include history.yaml
 input_boolean: !include_dir_merge_named input_boolean
@@ -128,19 +134,19 @@ fritzbox_guestwifi:
 hassio:
 system_health:
 
-panel_iframe:
-  ide:
-    title: IDE
-    icon: mdi:code-braces
-    url: !secret var_ide_url
-  portainer:
-    title: Portainer
-    icon: mdi:docker
-    url: !secret var_portainer_url
-  adguard:
-    title: AdGuard
-    icon: mdi:block-helper
-    url: !secret var_adguard_url
+# panel_iframe:
+#   ide:
+#     title: IDE
+#     icon: mdi:code-braces
+#     url: !secret var_ide_url
+#   portainer:
+#     title: Portainer
+#     icon: mdi:docker
+#     url: !secret var_portainer_url
+#   adguard:
+#     title: AdGuard
+#     icon: mdi:block-helper
+#     url: !secret var_adguard_url
 
 shell_command:
   lovelace_migrate: 'python3 /config/lovelace_migrate.py -c /config'
@@ -159,32 +165,32 @@ person:
     device_trackers:
       - device_tracker.theresa_smartphone       
       
-owntracks:
-  waypoints: false  # don't automatically publish owntracks regions as HA zones
-  max_gps_accuracy: 100  # Ignore reports with accuracy < x m
-  region_mapping:
-    home: home
-    blueshoe: blueshoe
-    uni: uni
+# owntracks:
+#   waypoints: false  # don't automatically publish owntracks regions as HA zones
+#   max_gps_accuracy: 100  # Ignore reports with accuracy < x m
+#   region_mapping:
+#     home: home
+#     blueshoe: blueshoe
+#     uni: uni
 
-zone:
-  - name: Home
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
-    radius: 100
-    icon: mdi:castle
-  - name: BLUESHOE
-    latitude: !secret max_work_latitude
-    longitude: !secret max_work_longitude
-    radius: 100
-    icon: mdi:briefcase-outline
-  - name: Uni
-    latitude: !secret uni_latitude
-    longitude: !secret uni_longitude
-    radius: 500
-    icon: mdi:school
+# zone:
+#   - name: Home
+#     latitude: !secret home_latitude
+#     longitude: !secret home_longitude
+#     radius: 100
+#     icon: mdi:castle
+#   - name: BLUESHOE
+#     latitude: !secret max_work_latitude
+#     longitude: !secret max_work_longitude
+#     radius: 100
+#     icon: mdi:briefcase-outline
+#   - name: Uni
+#     latitude: !secret uni_latitude
+#     longitude: !secret uni_longitude
+#     radius: 500
+#     icon: mdi:school
 
-map:
+# map:
 
 rest_command:
   hassio_google_backup:

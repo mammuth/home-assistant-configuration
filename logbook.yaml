@@ -8,6 +8,8 @@ exclude:
     - group.beleuchtung
     - group.people
     
+    - sensor.time
+    
     - light.wohnzimmer
     - light.kueche1
     - light.kueche2

@@ -44,16 +44,6 @@
   value_template: '{{ value | multiply(0.001) }}'
 
 
-# - platform: pi_hole
-#   name: Pi-hole
-#   unit_of_measurement: "%"
-#   monitored_conditions:
-#     - dns_queries_today
-#     - ads_blocked_today
-#     - ads_percentage_today
-#     - queries_cached
-#     - unique_clients
-
 - platform: time_date
   display_options:
     - 'time'

@@ -1,0 +1,11 @@
+name: Zuhause
+views:
+- cards:
+  - card_config:
+      title: All Entities
+    filter:
+    - {}
+    type: entity-filter
+  name: All Entities
+  tab_icon: mdi:settings
+

@@ -23,7 +23,6 @@ admin_view:
     - group.all_switches
     - group.humans
     - group.people
-    - group.pi_hole
     - group.admin_misc
     - group.admin_scenes
     - media_player.chromecast
@@ -37,4 +36,3 @@ pi_view:
   view: yes
   entities:
     - group.pi_sensors
-    - group.pi_hole

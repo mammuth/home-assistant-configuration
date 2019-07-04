@@ -1,0 +1,14 @@
+name: Zuhause
+views:
+- cards:
+  - card_config:
+      title: All Entities
+    filter:
+    - {}
+    type: entity-filter
+  name: All Entities
+  tab_icon: mdi:settings
+
+resources:
+  - url: /local/mini-media-player-bundle.js?v=1.0.1
+    type: module

@@ -61,9 +61,9 @@
   condition:
     condition: and
     conditions:
-    - condition: template
-      value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth
-        Audio" }}'
+    # - condition: template
+    #   value_template: '{{ states.media_player.soundbar.attribute.source == "Bluetooth
+    #     Audio" }}'
     - condition: state
       entity_id: device_tracker.tv
       state: not_home

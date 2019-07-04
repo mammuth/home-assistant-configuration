@@ -131,6 +131,10 @@ run_speedtest:
     - service: sensor.update_speedtest
 
 hassio_google_backup:
-  alias: Google Drive Backup durchführen
+  alias: Create Backup and upload to Drive
   sequence:
+    - service: hassio.snapshot_full
+      data_template:
+        name: automated-backup-{{ now().strftime('%Y-%m-%d') }}
+    - delay: 00:05:00
     - service: rest_command.hassio_google_backup

@@ -30,17 +30,17 @@
     light.esstisch: 
       state: on
       brightness_pct: 10
-      transition: 3
+      # transition: 3
     light.couchlampe:
       state: on
       brightness_pct: 50
       color_name: orange
-      transition: 5
+      # transition: 5
     light.stehlampe:
       state: on
       brightness_pct: 40
       color_name: orange
-      transition: 3
+      # transition: 3
 
 
 - name: cozy_lights
@@ -51,15 +51,15 @@
       state: on
       brightness_pct: 100
       kelvin: 2100
-      transition: 3
+      # transition: 3
     light.esstisch:
       state: on
       brightness_pct: 75
-      transition: 3
+      # transition: 3
     light.deckenlampe:
       state: on
       brightness_pct: 85
-      transition: 3
+      # transition: 3
 
 
 
@@ -79,11 +79,11 @@
       state: on
       brightness: 255
       color_name: red
-      transition: 3
+      # transition: 3
     light.esstisch:
       state: on
       brightness: 100
-      transition: 3
+      # transition: 3
 
 
 - name: reading
@@ -95,17 +95,17 @@
     light.esstisch:
       state: on
       brightness_pct: 40
-      transition: 2
+      # transition: 2
     light.couchlampe:
       state: on
       brightness_pct: 70
       color_name: orange
-      transition: 3
+      # transition: 3
     light.stehlampe:
       state: on
       brightness_pct: 50
       color_name: orange
-      transition: 2
+      # transition: 2
 
 
 
