@@ -25,3 +25,5 @@ phue.conf
 .HA_VERSION
 .spotify-token-cache
 .shopping_list.json
+
+._*
