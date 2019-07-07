@@ -12,6 +12,9 @@ homeassistant:
    - type: homeassistant
    - type: legacy_api_password
      api_password: !secret api_password
+  #  - type: trusted_networks
+  #    trusted_networks:
+  #     - 192.168.178.1/24
 
 
 sun:
@@ -38,11 +41,11 @@ weblink:
 
 
 
-mqtt:
-  broker: !secret var_ip_mqtt_broker
-  port: 1883
-  discovery: true
-  discovery_prefix: homeassistant
+# mqtt:
+#   broker: !secret var_ip_mqtt_broker
+#   port: 1883
+#   discovery: true
+#   discovery_prefix: homeassistant
 
 
 logger:
@@ -66,10 +69,6 @@ http:
   # api_password: !secret api_password
   ip_ban_enabled: True
   login_attempts_threshold: 2
-  trusted_networks: 
-    - !secret var_ip_thebeast
-    - !secret var_ip_max_smartphone
-    - !secret var_ip_theresa_smartphone
 
 
 # tts:
@@ -105,9 +104,9 @@ media_player:
   - platform: songpal
     name: Soundbar
     endpoint: !secret var_soundbar_songpal
-  - platform: androidtv
-    name: Fire TV
-    host: !secret var_ip_firetv
+  # - platform: androidtv
+  #   name: Fire TV
+  #   host: !secret var_ip_firetv
 
 light: !include light.yaml
 alexa: !include alexa.yaml
@@ -158,7 +157,7 @@ person:
     user_id: 281584ea78f64d79b4d71b6814ada37b
     device_trackers:
       - device_tracker.max_smartphone
-      - device_tracker.max_maxowntracks
+      # - device_tracker.max_maxowntracks
   - name: Theresa
     id: theresa
     user_id: 0bc097b44bc048f3a1b34442906d9b32

@@ -1,9 +1,3 @@
-# Generic HTML5 notification to all who are subscribed  
-- name: html5
-  platform: html5
-  gcm_api_key: !secret gcm_api_key
-  gcm_sender_id: !secret gcm_sender_id
-
 - name: pushbullet_max
   platform: pushbullet
   api_key: !secret pushbullet_max_token

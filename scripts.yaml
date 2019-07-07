@@ -138,3 +138,20 @@ hassio_google_backup:
         name: automated-backup-{{ now().strftime('%Y-%m-%d') }}
     - delay: 00:05:00
     - service: rest_command.hassio_google_backup
+
+
+# start_netflix:
+#   alias: Start Netflix on FireTV
+#   sequence:
+#   - service: media_player.select_source
+#     data:
+#       entity_id: media_player.fire_tv_living_room
+#       source: 'com.netflix.ninja'
+
+# stop_netflix:
+#   alias: Stop Netflix on FireTV
+#   sequence:
+#   - service: media_player.select_source
+#     data:
+#       entity_id: media_player.fire_tv_living_room
+#       source: '!com.netflix.ninja'
