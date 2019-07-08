@@ -3,3 +3,18 @@
   # switch:
   #   name: tp_switch_1
   #   host: 192.168.178.35
+
+
+# This switch is exposed to Alexa, so we can "turn on" / "turn off" the vacuum.
+# We cannot expose the vacuum domain to alexa apparently
+- platform: template
+  switches:
+    vacuum:
+      friendly_name: Staubi
+      value_template: "{{ is_state('vacuum.staubi', 'on') }}"
+      turn_on:
+        service: vacuum.start
+        entity_id: vacuum.staubi
+      turn_off:
+        service: vacuum.return_to_base
+        entity_id: vacuum.staubi

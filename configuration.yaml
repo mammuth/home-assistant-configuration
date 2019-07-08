@@ -108,6 +108,12 @@ media_player:
   #   name: Fire TV
   #   host: !secret var_ip_firetv
 
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret var_ip_vacuum
+    token: !secret vacuum_token
+    name: Staubi
+
 light: !include light.yaml
 alexa: !include alexa.yaml
 # intent_script: !include intent_script.yaml
