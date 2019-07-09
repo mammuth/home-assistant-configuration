@@ -6,3 +6,7 @@ alarm_clock_in_50m:
   name: Alarm clock rings in 50m
   initial: off
   # 5 min Smart WakeUp in Sleep As Android. Event gets fired 45m before that --> 50m Before wakeup
+
+vacuum_cleaned_today:
+  name: Vacuum Robot cleaned today
+  initial: off

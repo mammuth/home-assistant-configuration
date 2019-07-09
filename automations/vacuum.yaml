@@ -1,0 +1,87 @@
+# Schedule: Clean as soon as humans leave the house (between 10:00 18:00)
+# Flag: input_boolean.vacuum_cleaned_today 
+# If not cleaned until 18:00, it'll start cleaning
+
+- alias: 'Staubi: stopped cleaning notification & Flag update'
+  trigger:
+    platform: state
+    entity_id: vacuum.staubi
+    from: 'returning'
+    to: 'docked'
+  action:
+    # Set vacuum_cleaned_today flag
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.vacuum_cleaned_today
+    - service: notify.pushbullet_max
+      data:
+        title: Staubi hat Reinigung abgeschlossen
+    - service: notify.pushbullet_theresa
+      data:
+        title: Staubi hat Reinigung abgeschlossen
+
+
+- alias: 'Staubi: Start cleaning when everybody left'
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.humans_home
+    from: 'on'
+    to: 'off' 
+    # for:
+    #   minutes: 10  # ToDo
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '11:00:00'
+        before: '18:00:00'
+        weekday:
+          - mon
+          # - tue
+          - wed
+          # - thu
+          - fri
+      - condition: state
+        entity_id: input_boolean.cleaned_today
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+  action:
+    - service: script.vacuum_start_cleaning
+
+
+- alias: 'Staubi: Reset cleaned today counter'
+  initial_state: 'on'
+  trigger:
+    platform: time
+    at: '01:00:00'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.cleaned_today
+
+
+- alias: "Staubi: Clean in the evening when lazy humans didn't leave the house today"
+  trigger:
+      platform: time
+      at: '18:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+          # - tue
+          - wed
+          # - thu
+          - fri
+      - condition: state
+        entity_id: input_boolean.cleaned_today
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+  action:
+    - service: script.vacuum_start_cleaning

@@ -139,6 +139,16 @@ hassio_google_backup:
     - delay: 00:05:00
     - service: rest_command.hassio_google_backup
 
+vacuum_start_cleaning:
+  alias: Start vacuum robot cleaning
+  sequence:
+    - service: vacuum.start
+      entity_id: vacuum.staubi
+    - service: vacuum.set_fan_speed
+      data:
+        entity_id: vacuum.staubi
+        fan_speed: 75  # Turbo
+      
 
 # start_netflix:
 #   alias: Start Netflix on FireTV

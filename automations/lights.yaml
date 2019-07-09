@@ -150,7 +150,7 @@
 - alias: Turn on lights occasionally when on vacation
   trigger:
     platform: time
-    at: '21:32:00'
+    at: '20:32:00'
   condition:
   - condition: state
     entity_id: input_boolean.vacation_mode
@@ -158,9 +158,8 @@
   action:
   - service: light.turn_on
     data:
-      entity_id: light.stehlampe
+      entity_id: light.deckenlampe
       brightness: 255
-      color: white
   - service: notify.pushbullet_max
     data:
       title: Holiday Trap
@@ -172,7 +171,6 @@
     data:
       title: Holiday Trap
       message: Turned off all lights again
-  id: e5409dd8ea5242b198fbdf06a945f487
 
 
 - alias: Coming home -> Lights On

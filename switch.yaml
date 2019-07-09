@@ -13,8 +13,7 @@
       friendly_name: Staubi
       value_template: "{{ is_state('vacuum.staubi', 'on') }}"
       turn_on:
-        service: vacuum.start
-        entity_id: vacuum.staubi
+        service: script.vacuum_start_cleaning
       turn_off:
         service: vacuum.return_to_base
         entity_id: vacuum.staubi

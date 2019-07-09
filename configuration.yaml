@@ -41,13 +41,6 @@ weblink:
 
 
 
-# mqtt:
-#   broker: !secret var_ip_mqtt_broker
-#   port: 1883
-#   discovery: true
-#   discovery_prefix: homeassistant
-
-
 logger:
   default: warn
   # logs:
@@ -118,7 +111,6 @@ light: !include light.yaml
 alexa: !include alexa.yaml
 # intent_script: !include intent_script.yaml
 automation: !include_dir_merge_list automations/
-# group: !include_dir_merge_named groups
 history: !include history.yaml
 input_boolean: !include_dir_merge_named input_boolean
 logbook: !include logbook.yaml
@@ -163,7 +155,7 @@ person:
     user_id: 281584ea78f64d79b4d71b6814ada37b
     device_trackers:
       - device_tracker.max_smartphone
-      # - device_tracker.max_maxowntracks
+      # - device_tracker.max_owntracks
   - name: Theresa
     id: theresa
     user_id: 0bc097b44bc048f3a1b34442906d9b32

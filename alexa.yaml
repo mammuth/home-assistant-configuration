@@ -10,7 +10,7 @@ smart_home:
         - script.romantic_bedroom
         - script.bathroom_music
         - switch.adguard_protection
-        - 
+        - switch.vacuum
       exclude_entities:
         - input_boolean.alarm_clock_ringing
         - input_boolean.alarm_clock_in_50m
