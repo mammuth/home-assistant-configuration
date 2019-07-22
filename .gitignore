@@ -27,3 +27,5 @@ phue.conf
 .shopping_list.json
 
 ._*
+
+.vscode/

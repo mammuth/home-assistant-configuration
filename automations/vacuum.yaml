@@ -21,15 +21,11 @@
         title: Staubi hat Reinigung abgeschlossen
 
 
-- alias: 'Staubi: Start cleaning when everybody left'
+- alias: 'Staubi: Check every 15m and clean if no-one is home'
   initial_state: 'on'
   trigger:
-    platform: state
-    entity_id: binary_sensor.humans_home
-    from: 'on'
-    to: 'off' 
-    # for:
-    #   minutes: 10  # ToDo
+    platform: time_pattern
+    minutes: '/15'
   condition:
     condition: and
     conditions:
@@ -48,6 +44,11 @@
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: 'off'
+      - condition: state
+        entity_id: binary_sensor.humans_home
+        state: 'off'
+      - condition: template  # check whether humans_home has been off for > 15 minutes
+        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.humans_home. last_updated)) | int > 900 }}'
   action:
     - service: script.vacuum_start_cleaning
 
@@ -57,6 +58,9 @@
   trigger:
     platform: time
     at: '01:00:00'
+  condition:  # Only reset flag if it cleaned > 5 minutes
+    - condition: template
+      value_template: '{{ (as_timestamp(states.vacuum.staubi.attributes.clean_stop) - as_timestamp(states.vacuum.staubi.attributes.clean_start)) | int > 300 }}'
   action:
     - service: input_boolean.turn_off
       data:

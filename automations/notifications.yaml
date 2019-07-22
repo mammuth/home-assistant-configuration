@@ -56,4 +56,25 @@
       message: Theresa ist gleich Zuhause
 
 
+- alias: Device (TheBeast) turned on, while Max was away
+  id: thebeast_on__while_max_away
+  trigger:
+    platform: state
+    entity_id: device_tracker.thebeast
+    from: not_home
+    to: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: device_tracker.max_smartphone
+    state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: TheBeast turned on
+      message: TheBeast was turned on and Max is not home
+
       
