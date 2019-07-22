@@ -15,7 +15,7 @@ Within this repository I'm sharing my Home Assistant configuration.
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
 
 ### Main Dashboard (minimalistic)
-![Screenshot 2019-07-04 at 19 10 01](https://user-images.githubusercontent.com/3121306/60681793-d951b280-9e90-11e9-852e-f5f69b634557.png)
+![Screenshot 2019-07-22 at 19 35 52](https://user-images.githubusercontent.com/3121306/61652323-f0c5d380-acb7-11e9-892b-4be881276ef4.png)
 What I love most about our main view is the fact that it includes all fundamental light controls (individuals + scenes) for the living and bed room in two beautiful cards (the picture of the rooms are greyed out when all lights in the room are turned off).
 
 ### Admin Dashboard
