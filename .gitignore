@@ -5,11 +5,20 @@ tts/
 www/
 
 sftp-config.json
+.vscode
 
 home-assistant_v2.db
 home-assistant.log
 home-assistant_v2.db-wal
 home-assistant_v2.db-shm
+
+zigbee2mqtt/log
+zigbee2mqtt/.storage
+zigbee2mqtt/database.db
+zigbee2mqtt/state.json
+zigbee2mqtt/configuration.yaml  # Contains secrets
+
+custom_components/hacs
 
 secrets.yaml
 ip_bans.yaml
@@ -27,5 +36,3 @@ phue.conf
 .shopping_list.json
 
 ._*
-
-.vscode/

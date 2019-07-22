@@ -28,8 +28,7 @@
     service: persistent_notification.create
     data:
       title: Update verfügbar
-      message: Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases).
-        Update via `pip3 install --upgrade homeassistant`
+      message: Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases)
   id: d7648b1670b74d289bcf7f7b0adc7b97
 
 

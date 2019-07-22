@@ -14,6 +14,15 @@ sensor.pihole_ads_percentage_blocked_today:
   unit_of_measurement: '%'
   friendly_name: Blocked Percentage
 
+sensor.living_room_climate_temperature:
+  friendly_name: Wohnzimmer Temperatur
+sensor.living_room_climate_humidity:
+  friendly_name: Wohnzimmer Feuchtigkeit
+sensor.bathroom_climate_temperature:
+  friendly_name: Bad Temperatur
+sensor.bathroom_climate_humidity:
+  friendly_name: Bad Feuchtigkeit
+
 # Device Tracker
 device_tracker.tv:
   icon: mdi:television

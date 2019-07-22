@@ -128,6 +128,9 @@ fritzbox_guestwifi:
   username: !secret fritzbox_username
   password: !secret fritzbox_password
 
+hacs:
+  token: !secret hacs_github_token
+
 hassio:
 system_health:
 
