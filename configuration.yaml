@@ -44,8 +44,8 @@ weblink:
 
 logger:
   default: warn
-  # logs:
-  #   songpal.service: critical
+  logs:
+    songpal: error  # It's spamming with warnings
   #   homeassistant.components.google_assistant: debug
   #   homeassistant.components.google_assistant.auth: debug
   #   homeassistant.components.api: debug

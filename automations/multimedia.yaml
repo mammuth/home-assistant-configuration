@@ -25,7 +25,7 @@
     from: not_home
     to: home
   action:
-    service: media_player.media_pause
+    service: media_player.media_stop
     data:
       entity_id: media_player.spotify
 
