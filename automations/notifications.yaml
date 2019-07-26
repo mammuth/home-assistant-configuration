@@ -76,4 +76,43 @@
       title: TheBeast turned on
       message: TheBeast was turned on and Max is not home
 
-      
+
+
+- alias: High Humidty Notification
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_climate_humidity, sensor.bathroom_climate_humidity
+    above: 55
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.humans_home
+    state: 'on'
+  action:
+    - service: notify.pushbullet_max
+      data_template:
+        title: Luftfeuchtigkeitswarnung
+        message: '{{ trigger.to_state.state }}% - {{ trigger.to_state.attributes.friendly_name }}'
+    - service: notify.pushbullet_theresa
+      data_template:
+        title: Luftfeuchtigkeitswarnung
+        message: '{{ trigger.to_state.state }}% - {{ trigger.to_state.attributes.friendly_name }}'
+
+
+
+- alias: 'Sensor Low Battery Notification'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.living_room_climate_battery
+      below: 10
+    - platform: numeric_state
+      entity_id: sensor.bathroom_climate_battery
+      below: 10
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Sensor Low Battery Warning
+      message: "Es gibt Sensoren mit < 10% Batterie"

@@ -183,6 +183,8 @@
   condition:
     condition: and
     conditions:
+    - condition: template
+      value_template: '{{ states.sensor.time_since_humans_presence_change > 3600 }}'  # Only trigger if humans have been away for more than 1 hour
     - condition: state
       entity_id: sun.sun
       state: below_horizon

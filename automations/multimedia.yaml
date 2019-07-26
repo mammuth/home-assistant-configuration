@@ -58,6 +58,8 @@
     platform: state
     entity_id: media_player.spotify
     to: paused
+    for:
+      minutes: 5
   condition:
     condition: and
     conditions:

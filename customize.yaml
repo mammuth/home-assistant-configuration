@@ -1,8 +1,5 @@
-# Switchs
 switch.plug_kitchen:
   friendly_name: Küchensteckdose
-
-# Sensors
 sensor.pihole_dns_queries_today:
   icon: mdi:web
   friendly_name: DNS Queries Total
@@ -13,7 +10,6 @@ sensor.pihole_ads_blocked_today:
 sensor.pihole_ads_percentage_blocked_today:
   unit_of_measurement: '%'
   friendly_name: Blocked Percentage
-
 sensor.living_room_climate_temperature:
   friendly_name: Wohnzimmer Temperatur
 sensor.living_room_climate_humidity:
@@ -22,16 +18,16 @@ sensor.bathroom_climate_temperature:
   friendly_name: Bad Temperatur
 sensor.bathroom_climate_humidity:
   friendly_name: Bad Feuchtigkeit
-
-# Device Tracker
 device_tracker.tv:
   icon: mdi:television
 device_tracker.thebeast:
   icon: mdi:desktop-tower
 device_tracker.max_laptop:
   icon: mdi:laptop-chromebook
-
-# Scripts
+person.max:
+  entity_picture: https://www.gravatar.com/avatar/f68935bb93d6f010679d8603448db8d3.jpg
+person.theresa:
+  entity_picture: /local/theresa.jpg
 script.romantic_bedroom:
   icon: mdi:heart
 script.start_coffee_machine:
@@ -42,8 +38,6 @@ script.run_speedtest:
   icon: mdi:speedometer
 script.hassio_google_backup:
   icon: mdi:cloud-upload
-
-# Scenes
 scene.nachtlicht_scene:
   friendly_name: Schlafen
   icon: mdi:hotel
@@ -68,8 +62,6 @@ scene.reading:
 scene.bedroom_bright:
   friendly_name: Schlafzimmer hell
   icon: mdi:lightbulb-on
-
-# Groups
 group.all_scenes:
   friendly_name: Alle Szenen
   hidden: false
@@ -96,8 +88,6 @@ group.admin_view:
   order: 1
 group.pi_view:
   order: 2
-
-# Lights
 light.leselampe:
   icon: mdi:desk-lamp
 light.esstisch:

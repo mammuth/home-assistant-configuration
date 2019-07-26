@@ -24,6 +24,7 @@ frontend:
 # discovery:
 config:
 updater:
+  reporting: true  # Share system information
   include_used_components: true # Allows Home Assistant developers to focus on popular components.
 
 
@@ -44,6 +45,7 @@ weblink:
 logger:
   default: warn
   # logs:
+  #   songpal.service: critical
   #   homeassistant.components.google_assistant: debug
   #   homeassistant.components.google_assistant.auth: debug
   #   homeassistant.components.api: debug
@@ -109,6 +111,7 @@ vacuum:
 
 light: !include light.yaml
 alexa: !include alexa.yaml
+# alert: !include alert.yaml
 # intent_script: !include intent_script.yaml
 automation: !include_dir_merge_list automations/
 history: !include history.yaml
@@ -127,14 +130,21 @@ switch: !include switch.yaml
 fritzbox_guestwifi:
   username: !secret fritzbox_username
   password: !secret fritzbox_password
-
 hacs:
   token: !secret hacs_github_token
+breaking_changes:
+zigbee2mqtt_networkmap:
 
 hassio:
 system_health:
 
-# panel_iframe:
+webhook:
+
+panel_iframe:
+  zigbee_networkmap:
+     title: 'Zigbee Map'
+     url: '/local/community/zigbee2mqtt_networkmap/map.html'
+     icon: 'mdi:graphql'
 #   ide:
 #     title: IDE
 #     icon: mdi:code-braces

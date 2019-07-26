@@ -75,6 +75,8 @@
     - service: notify.pushbullet_max
       data:
         title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
+        message: ''
     - service: notify.pushbullet_theresa
       data:
         title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
+        message: ''

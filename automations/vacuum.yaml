@@ -16,19 +16,27 @@
     - service: notify.pushbullet_max
       data:
         title: Staubi hat Reinigung abgeschlossen
+        message: ''
     - service: notify.pushbullet_theresa
       data:
         title: Staubi hat Reinigung abgeschlossen
+        message: ''
 
 
+# Merge the two trigger automations?
+# Both triggers, base set of conditions.
+# Then in the service do a service_template and check time and not cleaned yet
+# https://community.home-assistant.io/t/automation-different-actions-based-on-condition/74349/3
 - alias: 'Staubi: Check every 15m and clean if no-one is home'
-  initial_state: 'on'
   trigger:
     platform: time_pattern
     minutes: '/15'
   condition:
     condition: and
     conditions:
+      - condition: state
+        entity_id: input_boolean.vacuum_scheduled_cleaning
+        state: 'on'
       - condition: time
         after: '11:00:00'
         before: '18:00:00'
@@ -39,8 +47,11 @@
           # - thu
           - fri
       - condition: state
-        entity_id: input_boolean.cleaned_today
+        entity_id: input_boolean.vacuum_cleaned_today
         state: 'off'
+      - condition: state
+        entity_id: vacuum.staubi
+        state: 'docked'
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: 'off'
@@ -48,32 +59,22 @@
         entity_id: binary_sensor.humans_home
         state: 'off'
       - condition: template  # check whether humans_home has been off for > 15 minutes
-        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.humans_home. last_updated)) | int > 900 }}'
+        value_template: '{{ states.sensor.time_since_humans_presence_change.state | int > 900 }}'
   action:
     - service: script.vacuum_start_cleaning
 
-
-- alias: 'Staubi: Reset cleaned today counter'
-  initial_state: 'on'
-  trigger:
-    platform: time
-    at: '01:00:00'
-  condition:  # Only reset flag if it cleaned > 5 minutes
-    - condition: template
-      value_template: '{{ (as_timestamp(states.vacuum.staubi.attributes.clean_stop) - as_timestamp(states.vacuum.staubi.attributes.clean_start)) | int > 300 }}'
-  action:
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.cleaned_today
 
 
 - alias: "Staubi: Clean in the evening when lazy humans didn't leave the house today"
   trigger:
       platform: time
-      at: '18:00'
+      at: '18:00:00'
   condition:
     condition: and
     conditions:
+      - condition: state
+        entity_id: input_boolean.vacuum_scheduled_cleaning
+        state: 'on'
       - condition: time
         weekday:
           - mon
@@ -82,10 +83,27 @@
           # - thu
           - fri
       - condition: state
-        entity_id: input_boolean.cleaned_today
+        entity_id: input_boolean.vacuum_cleaned_today
         state: 'off'
+      - condition: state
+        entity_id: vacuum.staubi
+        state: 'docked'
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: 'off'
   action:
     - service: script.vacuum_start_cleaning
+
+
+
+- alias: 'Staubi: Reset cleaned today counter'
+  trigger:
+    platform: time
+    at: '01:00:00'
+  condition:  # Only reset flag if it cleaned > 5 minutes
+    - condition: template
+      value_template: '{{ states.sensor.staubi_last_clean_duration > 300 }}'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.vacuum_cleaned_today

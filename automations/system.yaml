@@ -1,0 +1,33 @@
+- alias: Daily snapshot at 03:00
+  hide_entity: True
+  trigger:
+    platform: time
+    at: '03:00:00'
+  action:
+    - service: script.hassio_google_backup
+
+
+- alias: LetsEncrypt certificate renewal
+  id: letsencrypt-renewal
+  trigger:
+    - platform: time
+      at: '04:00:00'
+  action:
+    - service: hassio.addon_stop
+      data:
+        addon: core_nginx_proxy
+    - service: hassio.addon_restart
+      data:
+        addon: core_letsencrypt
+    - delay: '00:02:30'
+    - service: hassio.addon_start
+      data:
+        addon: core_nginx_proxy
+
+
+- alias: Update Zigbee Map
+  trigger:
+    platform: time_pattern
+    hours: '/1'
+  action:
+    service: zigbee2mqtt_networkmap.update

@@ -9,6 +9,9 @@ exclude:
     - group.people
     
     - sensor.time
+    - sensor.time_since_humans_presence_change
+    - sensor.staubi_last_clean_duration
+    - sensor.staubi_last_clean_date
     
     - light.wohnzimmer
     - light.kueche1

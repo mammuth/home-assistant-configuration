@@ -16,7 +16,7 @@ zigbee2mqtt/log
 zigbee2mqtt/.storage
 zigbee2mqtt/database.db
 zigbee2mqtt/state.json
-zigbee2mqtt/configuration.yaml  # Contains secrets
+zigbee2mqtt/configuration.yaml  # contains secrets
 
 custom_components/hacs
 

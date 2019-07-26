@@ -11,6 +11,10 @@ smart_home:
         - script.bathroom_music
         - switch.adguard_protection
         - switch.vacuum
+        - sensor.living_room_climate_temperature
+        - sensor.living_room_climate_humidity
+        - sensor.bathroom_climate_temperature
+        - sensor.bathroom_climate_humidity
       exclude_entities:
         - input_boolean.alarm_clock_ringing
         - input_boolean.alarm_clock_in_50m
@@ -24,3 +28,7 @@ smart_home:
         name: Küche
       switch.adguard_protection:
         name: AdGuard
+      sensor.living_room_climate_temperature:
+        name: Wohnzimmer
+      sensor.bathroom_climate_temperature:
+        name: Bad

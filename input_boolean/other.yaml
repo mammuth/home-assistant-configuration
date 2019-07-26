@@ -1,0 +1,4 @@
+vacuum_scheduled_cleaning:
+  name: "Staubi Reinigungsplan"
+  icon: mdi:calendar-clock
+  initial: on

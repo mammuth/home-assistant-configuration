@@ -119,3 +119,32 @@
   unit_of_measurement: "%"
   device_class: "battery"
   value_template: "{{ value_json.battery }}"
+
+# Staubi sensors
+- platform: template
+  sensors:
+    staubi_last_clean_duration:  # duration in minutes
+      value_template: >
+        {% set stop = states.vacuum.staubi.attributes.clean_stop %}
+        {% set start = states.vacuum.staubi.attributes.clean_start %}
+        {{ ((as_timestamp(stop) - as_timestamp(start)) / 60) | int }}
+      friendly_name: 'Staubi letzte Reinigung Dauer'
+      unit_of_measurement: 'm'
+    staubi_last_clean_date:
+      value_template: >
+        {% set date = states.vacuum.staubi.attributes.clean_stop %}
+        {{ date.strftime('%d.%m. %H:%M') }}
+      friendly_name: 'Staubis letzte Reinigung'
+
+
+# Time since human presence changed last time
+# Usage
+# - condition: template  # check whether humans_home has been off for > 15 minutes
+#   value_template: '{{ states.sensor.time_since_humans_presence_change.state | int > 900 }}'
+- platform: template
+  sensors:
+    time_since_humans_presence_change:
+      entity_id: sensor.time
+      value_template: >
+        {{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.humans_home.last_updated)) | int }}
+    
