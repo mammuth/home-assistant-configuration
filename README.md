@@ -23,5 +23,6 @@ What I love most about our main view is the fact that it includes all fundamenta
 ### Room detail views
 ![Screenshot 2019-09-15 at 16 57 52](https://user-images.githubusercontent.com/3121306/64923413-08ae6500-d7da-11e9-964f-aa7882632d12.png)
 
-### System Monitoring
-![Screenshot 2019-09-15 at 16 58 01](https://user-images.githubusercontent.com/3121306/64923415-08ae6500-d7da-11e9-9fa2-000d25dc0fcf.png)
+### System Monitoring & Controlling
+![Screenshot 2019-09-15 at 17 06 19](https://user-images.githubusercontent.com/3121306/64923571-2c25df80-d7db-11e9-8933-d81c2092c14e.png)
+
