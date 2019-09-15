@@ -11,6 +11,7 @@ This repository contains most parts of my Home Assistant configuration.
 - Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
 - Presence-based vacuum robot cleaning schedule
 - Voice control of most stuff (Alexa / Google Assistant)
+- Alerts on high air humidity
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
 - Enable shuffle mode on spotify ([shell script](https://github.com/mammuth/home-assistant-configuration/blob/master/shell_commands/shuffle_spotify.sh))
 
