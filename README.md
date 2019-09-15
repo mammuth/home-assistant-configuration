@@ -5,11 +5,11 @@
 This repository contains most parts of my Home Assistant configuration.
 
 ### Noteworthy stuff
-- 22 automations in total
-- Offline Voice Control for everything via DIY Amazon Echo (using HA and snips)
+- 37 automations in total
 - FRITZ!Box Guest Wifi Control ([custom_component](https://github.com/mammuth/ha-fritzbox-tools/))
 - Turn coffee machine on when alarm clock rings (using Sleep As Android and a Wifi switch)
 - Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
+- Presence-based vacuum robot cleaning schedule
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
 - Enable shuffle mode on spotify ([shell script](https://github.com/mammuth/home-assistant-configuration/blob/master/shell_commands/shuffle_spotify.sh))
 
@@ -17,11 +17,11 @@ This repository contains most parts of my Home Assistant configuration.
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
 
 ### Main Dashboard (minimalistic)
-![Screenshot 2019-07-22 at 19 35 52](https://user-images.githubusercontent.com/3121306/61652323-f0c5d380-acb7-11e9-892b-4be881276ef4.png)
+![Screenshot 2019-09-15 at 16 57 35](https://user-images.githubusercontent.com/3121306/64923412-08ae6500-d7da-11e9-9c42-52dbf56778fa.png)
 What I love most about our main view is the fact that it includes all fundamental light controls (individuals + scenes) for the living and bed room in two beautiful cards (the picture of the rooms are greyed out when all lights in the room are turned off).
 
-### Admin Dashboard
-![image](https://user-images.githubusercontent.com/3121306/36357326-a3d87126-14fc-11e8-8270-600feca50ac0.png)
+### Room detail views
+![Screenshot 2019-09-15 at 16 57 52](https://user-images.githubusercontent.com/3121306/64923413-08ae6500-d7da-11e9-964f-aa7882632d12.png)
 
-### Raspberry PI Monitoring
-![Screenshot 2019-07-04 at 19 23 06](https://user-images.githubusercontent.com/3121306/60681880-2b92d380-9e91-11e9-8ae5-feaef18cdb81.png)
+### System Monitoring
+![Screenshot 2019-09-15 at 16 58 01](https://user-images.githubusercontent.com/3121306/64923415-08ae6500-d7da-11e9-9fa2-000d25dc0fcf.png)
