@@ -1,11 +1,13 @@
 # My Configuration for Home Assistant
 
-Within this repository I'm sharing my Home Assistant configuration.
+<a href="https://www.buymeacoffee.com/mammuth" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+This repository contains most parts of my Home Assistant configuration.
 
 ### Noteworthy stuff
 - 22 automations in total
 - Offline Voice Control for everything via DIY Amazon Echo (using HA and snips)
-- FRITZ!Box Guest Wifi Control ([custom_component](https://github.com/mammuth/home-assistant-configuration/blob/master/custom_components/fritzbox_guestwifi.py))
+- FRITZ!Box Guest Wifi Control ([custom_component](https://github.com/mammuth/ha-fritzbox-tools/))
 - Turn coffee machine on when alarm clock rings (using Sleep As Android and a Wifi switch)
 - Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
