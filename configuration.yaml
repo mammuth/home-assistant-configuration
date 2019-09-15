@@ -127,13 +127,18 @@ binary_sensor: !include binary_sensors.yaml
 switch: !include switch.yaml
 
 # Custom Components
-fritzbox_guestwifi:
-  username: !secret fritzbox_username
-  password: !secret fritzbox_password
 hacs:
   token: !secret hacs_github_token
 breaking_changes:
 zigbee2mqtt_networkmap:
+fritzbox_tools:
+  username: !secret fritzbox_username
+  password: !secret fritzbox_password
+# alexa_media:
+#   accounts:
+#     - email: !secret amazon_user
+#       password: !secret amazon_password
+#       url: amazon.de
 
 hassio:
 system_health:

@@ -1,4 +1,4 @@
-- alias: Falling asleep -> Nightlight off
+- alias: "Lights: Falling asleep -> Nightlight off"
   id: automatic_nightlight
   trigger:
   - platform: state
@@ -22,7 +22,7 @@
     entity_id: scene.nachtlicht_10m
 
 
-- alias: Falling asleep -> Nightlight off (after turning on again)
+- alias: "Lights: Falling asleep -> Nightlight off (after turning on again)"
   id: automatic_nightlight_after_manual_turn_on
   trigger:
   - platform: state
@@ -47,7 +47,7 @@
       message: Das Nachtlicht geht in 10 Minuten aus. (Zweites Nachtlicht Timer)
 
 
-- alias: Sleeping Room light on at evening -> nightlight scene
+- alias: "Lights: Sleeping Room light on at evening -> nightlight scene"
   id: sleeping_room_light_on__nightlight_scene_when_evening
   trigger:
   - platform: state
@@ -68,8 +68,8 @@
     entity_id: scene.nachtlicht_scene
 
 
-- id: humans_away__lights_off
-  alias: Away for 15m -> Lights off
+- alias: "Lights: Away for 15m -> Lights off"
+  id: humans_away__lights_off
   trigger:
   - entity_id: binary_sensor.humans_home
     for:
@@ -93,7 +93,7 @@
     service: light.turn_off
 
 
-- alias: TV on -> Dim lights
+- alias: "Lights: TV on -> Dim lights"
   id: tv_on__lights_dimmed
   trigger:
     platform: state
@@ -111,7 +111,7 @@
     entity_id: scene.tv
 
 
-- alias: Living Room Lights on -> TV scene (if TV on)
+- alias: "Lights: Living Room Lights on -> TV scene (if TV on)"
   id: living_room_lights_on__tv_scene
   initial_state: false
   trigger:
@@ -126,7 +126,9 @@
   action:
   - service: scene.turn_on
     entity_id: scene.tv
-- alias: TV off -> Cozy lights
+
+
+- alias: "Lights: TV off -> Cozy lights"
   id: tv_off__lights_bright
   trigger:
     platform: state
@@ -147,7 +149,7 @@
     entity_id: scene.cozy_lights
 
 
-- alias: Turn on lights occasionally when on vacation
+- alias: "Lights: Turn on lights occasionally when on vacation"
   trigger:
     platform: time
     at: '20:32:00'
@@ -173,7 +175,7 @@
       message: Turned off all lights again
 
 
-- alias: Coming home -> Lights On
+- alias: "Lights: Coming home -> Lights On"
   id: coming_home__lights_on
   trigger:
     platform: state
@@ -185,12 +187,15 @@
     conditions:
     - condition: template
       value_template: '{{ states.sensor.time_since_humans_presence_change > 3600 }}'  # Only trigger if humans have been away for more than 1 hour
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
+    # - condition: state
+    #   entity_id: sun.sun
+    #   state: below_horizon
     - condition: time
-      after: '17:00:00'
+      after: '16:30:00'
       before: 04:00:00
+    - condition: numeric_state
+      entity_id: sensor.yrs_illuminance
+      above: 7000
   action:
   - service: scene.turn_on
     entity_id: scene.cozy_lights

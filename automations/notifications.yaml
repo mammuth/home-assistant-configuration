@@ -1,38 +1,4 @@
-- alias: Device (MacBook) turned on, while Max was away
-  id: laptop_on__while_max_away
-  trigger:
-    platform: state
-    entity_id: device_tracker.max_laptop
-    from: not_home
-    to: home
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-  condition:
-  - condition: state
-    entity_id: device_tracker.max_smartphone
-    state: not_home
-  action:
-    service: notify.pushbullet_max
-    data:
-      title: Laptop turned on
-      message: MacBook was turned on and Max is not home
-
-
-- alias: Update Available Notification
-  trigger:
-    platform: state
-    entity_id: updater.updater
-  action:
-    service: persistent_notification.create
-    data:
-      title: Update verfügbar
-      message: Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases)
-  id: d7648b1670b74d289bcf7f7b0adc7b97
-
-
-- alias: Theresa Arrives -> Notify Max
+- alias: "Notify: Theresa Arrives -> Notify Max"
   id: theresa_arrives__notify_max
   trigger:
     platform: state
@@ -55,7 +21,41 @@
       message: Theresa ist gleich Zuhause
 
 
-- alias: Device (TheBeast) turned on, while Max was away
+- alias: "Notify: Device (MacBook) turned on, while Max was away"
+  id: laptop_on__while_max_away
+  trigger:
+    platform: state
+    entity_id: device_tracker.max_laptop
+    from: not_home
+    to: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: device_tracker.max_smartphone
+    state: not_home
+  action:
+    service: notify.pushbullet_max
+    data:
+      title: Laptop turned on
+      message: MacBook was turned on and Max is not home
+
+
+- alias: "Notify: Update Available Notification"
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: persistent_notification.create
+    data:
+      title: Update verfügbar
+      message: Take a look at the [release notes](https://github.com/home-assistant/home-assistant/releases)
+  id: d7648b1670b74d289bcf7f7b0adc7b97
+
+
+- alias: "Notify: Device (TheBeast) turned on, while Max was away"
   id: thebeast_on__while_max_away
   trigger:
     platform: state
@@ -78,7 +78,7 @@
 
 
 
-- alias: High Humidty Notification
+- alias: "Notify: High Humidty Notification"
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_climate_humidity, sensor.bathroom_climate_humidity
@@ -91,6 +91,8 @@
   - condition: state
     entity_id: binary_sensor.humans_home
     state: 'on'
+  - condition: template  # only notify if the humidity is rising
+    value_template: '{{ trigger.to_state.state > trigger.from_state.state }}'
   action:
     - service: notify.pushbullet_max
       data_template:
@@ -103,7 +105,7 @@
 
 
 
-- alias: 'Sensor Low Battery Notification'
+- alias: "Notify: Sensor Low Battery Notification"
   trigger:
     - platform: numeric_state
       entity_id: sensor.living_room_climate_battery

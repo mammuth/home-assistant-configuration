@@ -101,3 +101,5 @@ light.kuche:
   friendly_name: Küchenlicht
 light.wohnzimmer:
   icon: mdi:sofa
+script.fritz_box_reconnect:
+  icon: mdi:lan-disconnect

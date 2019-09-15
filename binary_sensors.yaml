@@ -6,3 +6,12 @@
       value_template: >
         {{ is_state('device_tracker.max_smartphone', 'home') or
             is_state('device_tracker.theresa_smartphone', 'home') }}
+
+# - platform: trend
+#   sensors:
+#     living_room_humidity_rising:
+#       entity_id: sensor.living_room_climate_humidity
+#       friendly_name: 'Trend Feuchtigkeit Wohnzimmer'
+#     bathroom_humidity_rising:
+#       entity_id: sensor.bathroom_climate_humidity
+#       friendly_name: 'Trend Feuchtigkeit Bad'

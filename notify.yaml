@@ -5,3 +5,6 @@
 - name: pushbullet_theresa
   platform: pushbullet
   api_key: !secret pushbullet_theresa_token
+
+# - name: alexa_media
+#   platform: alexa_media

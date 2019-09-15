@@ -1,4 +1,4 @@
-- alias: Daily snapshot at 03:00
+- alias: "System: Daily snapshot at 03:00"
   hide_entity: True
   trigger:
     platform: time
@@ -7,7 +7,7 @@
     - service: script.hassio_google_backup
 
 
-- alias: LetsEncrypt certificate renewal
+- alias: "System: LetsEncrypt certificate renewal"
   id: letsencrypt-renewal
   trigger:
     - platform: time
@@ -25,9 +25,37 @@
         addon: core_nginx_proxy
 
 
-- alias: Update Zigbee Map
+- alias: "System: Update Zigbee Map"
   trigger:
     platform: time_pattern
     hours: '/1'
   action:
     service: zigbee2mqtt_networkmap.update
+
+
+
+- alias: "System: Re-Enable AdGuard after 1h"
+  trigger:
+    platform: state
+    entity_id: switch.adguard_protection
+    to: 'off'
+  action:
+    - delay: 01:00:00
+    - service: switch.turn_on
+      entity_id: switch.adguard_protection
+    - service: notify.pushbullet_max
+      data:
+        title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
+        message: ''
+    - service: notify.pushbullet_theresa
+      data:
+        title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
+        message: ''
+
+
+- alias: "System: Reconnect FRITZ!Box"
+  trigger:
+    platform: time
+    at: '05:00:00'
+  action:
+    - service: fritzbox_tools.reconnect

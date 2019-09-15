@@ -169,3 +169,8 @@ vacuum_start_cleaning:
 #     data:
 #       entity_id: media_player.fire_tv_living_room
 #       source: '!com.netflix.ninja'
+
+fritz_box_reconnect:
+  alias: "Reconnect FRITZ!Box"
+  sequence:
+  - service: fritzbox_tools.reconnect

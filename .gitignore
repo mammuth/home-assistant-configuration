@@ -18,7 +18,7 @@ zigbee2mqtt/database.db
 zigbee2mqtt/state.json
 zigbee2mqtt/configuration.yaml  # contains secrets
 
-custom_components/hacs
+custom_components/*
 
 secrets.yaml
 ip_bans.yaml

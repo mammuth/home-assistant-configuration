@@ -1,4 +1,4 @@
-- alias: IFTTT Webhook receiver
+- alias: "Other: IFTTT Webhook receiver"
   trigger:
     platform: event
     event_type: ifttt_webhook_received
@@ -11,37 +11,38 @@
   id: 01dad040eb5246618eb384f83317f72b
 
 
-- alias: Night -> Dark Theme
-  initial_state: true
-  trigger:
-  - platform: time
-    at: '22:00'
-  action:
-  - service: frontend.set_theme
-    data:
-      name: midnight
-  id: a3ee7c18f5234c01abfbc76f00db43df
+# - alias: Night -> Dark Theme
+#   initial_state: true
+#   trigger:
+#   - platform: time
+#     at: '22:00'
+#   action:
+#   - service: frontend.set_theme
+#     data:
+#       name: midnight
+#   id: a3ee7c18f5234c01abfbc76f00db43df
 
 
-- alias: Morning -> Main Theme
-  initial_state: true
-  trigger:
-  - platform: time
-    at: 07:00
-  action:
-  - service: frontend.set_theme
-    data:
-      name: default
-  id: 6a0f246b115348a49f52c54a90a5f733
+# - alias: Morning -> Main Theme
+#   initial_state: true
+#   trigger:
+#   - platform: time
+#     at: 07:00
+#   action:
+#   - service: frontend.set_theme
+#     data:
+#       name: default
+#   id: 6a0f246b115348a49f52c54a90a5f733
 
 
-- alias: Guests -> Turn on guest wifi
+- alias: "Other: Guests -> Turn on guest wifi"
   trigger:
     platform: state
     entity_id: input_boolean.guest_mode
     to: 'on'
   action:
-  - service: fritzbox_guestwifi.turn_on
+  - service: homeassistant.turn_on
+    entity_id: switch.fritz_box_guest_wifi
   - service: notify.pushbullet_max
     data:
       title: Gäste-Wlan ist jetzt an
@@ -53,30 +54,12 @@
   id: 1c6a6a19a84c46fab55892167036821c
 
 
-- alias: Guests Away -> Turn off guest wifi
+- alias: "Other: Guests Away -> Turn off guest wifi"
   trigger:
     platform: state
     entity_id: input_boolean.guest_mode
     to: 'off'
   action:
-  - service: fritzbox_guestwifi.turn_off
+  - service: homeassistant.turn_off
+    entity_id: switch.fritz_box_guest_wifi
   id: dce1cd19af0342beaa7ea709ad31a9a9
-
-
-- alias: "Re-Enable AdGuard after 1h"
-  trigger:
-    platform: state
-    entity_id: switch.adguard_protection
-    to: 'off'
-  action:
-    - delay: 01:00:00
-    - service: switch.turn_on
-      entity_id: switch.adguard_protection
-    - service: notify.pushbullet_max
-      data:
-        title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
-        message: ''
-    - service: notify.pushbullet_theresa
-      data:
-        title: DNS AdBlock wurde nach 1h wieder automatisch aktiviert
-        message: ''

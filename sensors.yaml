@@ -120,6 +120,32 @@
   device_class: "battery"
   value_template: "{{ value_json.battery }}"
 
+# Climate statistics
+- platform: statistics
+  entity_id: sensor.living_room_climate_humidity
+  name: Wohnzimmer Luftfeuchtigkeit Statistiken
+  sampling_size: 10000
+  max_age:
+    hours: 168  # 7 days
+- platform: statistics
+  entity_id: sensor.living_room_climate_temperature
+  name: Wohnzimmer Temperatur Statistiken
+  sampling_size: 10000
+  max_age:
+    hours: 168  # 7 days
+- platform: statistics
+  entity_id: sensor.bathroom_climate_humidity
+  name: Bad Luftfeuchtigkeit Statistiken
+  sampling_size: 10000
+  max_age:
+    hours: 168  # 7 days
+- platform: statistics
+  entity_id: sensor.bathroom_climate_temperature
+  name: Bad Temperatur Statistiken
+  sampling_size: 10000
+  max_age:
+    hours: 168  # 7 days
+
 # Staubi sensors
 - platform: template
   sensors:
@@ -148,3 +174,17 @@
       value_template: >
         {{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.humans_home.last_updated)) | int }}
     
+
+# Zigbee bridge state
+- platform: mqtt
+  name: Zigbee Bridge
+  state_topic: "zigbee2mqtt/bridge/state"
+  icon: mdi:router-wireless
+
+
+- platform: yr
+  monitored_conditions:
+    - symbol
+- platform: illuminance
+  name: YRS Illuminance
+  entity_id: sensor.yr_symbol

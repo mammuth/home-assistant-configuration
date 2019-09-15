@@ -1,4 +1,4 @@
-- alias: Alarm clock ringing -> Turn off ringing flag again
+- alias: "Alarm clock: ringing -> Turn off ringing flag again"
   id: alarm_ringing__reset_flag
   trigger:
     platform: state
@@ -12,7 +12,7 @@
       entity_id: input_boolean.alarm_clock_ringing
 
 
-- alias: Alarm clock ringing -> Lights on
+- alias: "Alarm clock: ringing -> Lights on"
   id: alarm_ringing__lights_on
   trigger:
     platform: state
@@ -35,7 +35,7 @@
     entity_id: scene.aufwachen
 
 
-- alias: Alarm clock ringing -> Start Music
+- alias: "Alarm clock: ringing -> Start Music"
   id: alarm_ringing__start_music
   trigger:
     platform: state
@@ -68,7 +68,7 @@
       media_content_id: spotify:user:mammuthroid:playlist:6GdskPZ2GqgyBZe4ArV83F
 
 
-- alias: Alarm in 50m -> Wake Up Light
+- alias: "Alarm Clock: Alarm in 50m -> Wake Up Light"
   id: alarm_in_50m__wakeup_light
   trigger:
     platform: state

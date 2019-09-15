@@ -46,7 +46,7 @@
 - name: cozy_lights
   entities:
     light.leselampe: off
-    light.kitchen_group: off
+    # light.kitchen_group: off
     light.wohnzimmer:
       state: on
       brightness_pct: 100

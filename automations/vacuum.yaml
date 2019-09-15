@@ -100,9 +100,14 @@
   trigger:
     platform: time
     at: '01:00:00'
-  condition:  # Only reset flag if it cleaned > 5 minutes
-    - condition: template
-      value_template: '{{ states.sensor.staubi_last_clean_duration > 300 }}'
+  # condition:
+  #   condition: or
+  #   conditions:
+  #   - condition: numeric_state
+  #     entity_id: sensor.staubi_last_clean_duration
+  #     above: 3  # Only reset flag if it cleaned > 3 minutes
+  #   - condition: template  # last cleanup was more than 12 hours ago
+  #     value_template: "{{ (as_timestamp(now()) - as_timestamp(states.vacuum.staubi.attributes.clean_stop) | int) / 60 / 60 > 12 }}"
   action:
     - service: input_boolean.turn_off
       data:
