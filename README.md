@@ -5,22 +5,24 @@
 This repository contains most parts of my Home Assistant configuration.
 
 ### Noteworthy stuff
-- 37 automations in total
-- FRITZ!Box Guest Wifi Control ([custom_component](https://github.com/mammuth/ha-fritzbox-tools/))
-- Turn coffee machine on when alarm clock rings (using Sleep As Android and a Wifi switch)
-- Turn on bedroom lights 15m before my alarm starts (using Tasker and Sleep As Android)
+- 46 automations in total
+- FRITZ!Box control and info ([custom_component](https://github.com/mammuth/ha-fritzbox-tools/))
+- Fade in lights before the alarm goes of and then start music for a nice start into the day
 - Presence-based vacuum robot cleaning schedule
-- Voice control of most stuff (Alexa / Google Assistant)
-- Alerts on high air humidity
+- Voice control of all important things (Alexa / Google Assistant)
+- Voice alerts on high air humidity
+- Voice announcements after I have changed the air in a room for 5 and 10 minutes
 - Many light automations (Turn on when arriving home, turn off when leaving, dim when TV is turned on, ...)
-- Enable shuffle mode on spotify ([shell script](https://github.com/mammuth/home-assistant-configuration/blob/master/shell_commands/shuffle_spotify.sh))
+- Motion sensors for some lights (eg. corridors, kitchen ceiling)
+- Statistics about media usage (TV-time, App usage (Netflix, Twitch, YouTube, ...)
+- Clima statistics for the past 7 days
 
 
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
 
 ### Main Dashboard (minimalistic)
 ![Screenshot 2019-12-29 at 13 51 56](https://user-images.githubusercontent.com/3121306/71557201-18794e80-2a43-11ea-9ff3-7986307f0ab6.png)
-What I love most about our main view is the fact that it includes all fundamental light controls (individuals + scenes) for the living and bed room in two beautiful cards (the picture of the rooms are greyed out when all lights in the room are turned off).
+What I love most about our main view is the fact that it includes all fundamental light controls (individuals + scenes) for the important rooms in beautiful picture-cards (the pictures are greyed out when all lights in the room are turned off).
 
 ### Room detail views
 ![Screenshot 2019-12-29 at 13 52 34](https://user-images.githubusercontent.com/3121306/71557202-18794e80-2a43-11ea-8517-975004ab70dc.png)
