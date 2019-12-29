@@ -19,12 +19,16 @@ This repository contains most parts of my Home Assistant configuration.
 Most of the code / configuration is English except friendly names of frontend-facing entities (which are German).
 
 ### Main Dashboard (minimalistic)
-![Screenshot 2019-09-15 at 16 57 35](https://user-images.githubusercontent.com/3121306/64923412-08ae6500-d7da-11e9-9c42-52dbf56778fa.png)
+![Screenshot 2019-12-29 at 13 51 56](https://user-images.githubusercontent.com/3121306/71557201-18794e80-2a43-11ea-9ff3-7986307f0ab6.png)
 What I love most about our main view is the fact that it includes all fundamental light controls (individuals + scenes) for the living and bed room in two beautiful cards (the picture of the rooms are greyed out when all lights in the room are turned off).
 
 ### Room detail views
-![Screenshot 2019-09-15 at 16 57 52](https://user-images.githubusercontent.com/3121306/64923413-08ae6500-d7da-11e9-964f-aa7882632d12.png)
+![Screenshot 2019-12-29 at 13 52 34](https://user-images.githubusercontent.com/3121306/71557202-18794e80-2a43-11ea-8517-975004ab70dc.png)
+![Screenshot 2019-12-29 at 13 53 20](https://user-images.githubusercontent.com/3121306/71557203-18794e80-2a43-11ea-8cb6-32fa3968149d.png)
+![Screenshot 2019-12-29 at 13 53 40](https://user-images.githubusercontent.com/3121306/71557204-18794e80-2a43-11ea-95f7-6778ee8e6aea.png)
 
 ### System Monitoring & Controlling
-![Screenshot 2019-09-15 at 17 06 19](https://user-images.githubusercontent.com/3121306/64923571-2c25df80-d7db-11e9-8933-d81c2092c14e.png)
+![Screenshot 2019-12-29 at 13 54 14](https://user-images.githubusercontent.com/3121306/71557205-1911e500-2a43-11ea-884c-68dee834e93e.png)
 
+### Statistics
+![Screenshot 2019-12-29 at 13 54 43](https://user-images.githubusercontent.com/3121306/71557206-1911e500-2a43-11ea-8207-3f2803c52a20.png)
