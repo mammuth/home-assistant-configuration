@@ -4,6 +4,8 @@
 
 This repository contains most parts of my Home Assistant configuration.
 
+**Status**: This repository is not really updated anymore after I switched to Hassio and migrated many integrations to config flow.
+
 ### Noteworthy stuff
 - 46 automations in total
 - FRITZ!Box control and info ([custom_component](https://github.com/mammuth/ha-fritzbox-tools/))
